@@ -1,3 +1,48 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "next"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": { "es2021": true },
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          // ext library & side effect imports
+          ["^react", "^next/", "^@?\\w", "^\\u0000"],
+          // {s}css files
+          ["^.+\\.s?css$"],
+          // Lib and hooks
+          ["^@/lib", "^@/hooks"],
+          // static data
+          ["^@/data"],
+          // components
+          ["^@/components"],
+          // Other imports
+          ["^@/"],
+          // relative paths up until 3 level
+          [
+            "^\\./?$",
+            "^\\.(?!/?$)",
+            "^\\.\\./?$",
+            "^\\.\\.(?!/?$)",
+            "^\\.\\./\\.\\./?$",
+            "^\\.\\./\\.\\.(?!/?$)",
+            "^\\.\\./\\.\\./\\.\\./?$",
+            "^\\.\\./\\.\\./\\.\\.(?!/?$)"
+          ],
+          /* ["^@/types"], */
+          // other that didnt fit in
+          ["^"]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "warn",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
+  }
 }

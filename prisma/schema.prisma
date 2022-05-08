@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id           String          @id @default(cuid())
+  images       String[]
+  title        String
+  description  String
+  price        Float
+  rooms        Int
+  bathrooms    Int
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  address      String
+  city         String
+  zipcode      String
+  countryId    Int
+  propertyType String
+  ownerId      String
+  size         Float
+  status       String
+  isSold       Boolean         @default(false)
+  isRented     Boolean         @default(false)
+  isSponsored  Boolean         @default(false)
+  isPublished  Boolean         @default(true)
+  owner        Agency          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  bookmarkedBy Favorite[]
+  ratings      Rating[]
+  options      ListingOption[]
+  country      Country         @relation(fields: [countryId], references: [value])
+
+}
+
+model ListingOption {
+  id          String    @id @default(cuid())
+  label       String
+  description String
+  image       String
+  listings    Listing[]
+}
+
+model Favorite {
+  listingId String
+  userId    String
+  addedAt   DateTime @default(now())
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([listingId, userId])
+}
+
+model Rating {
+  id        String   @id @default(cuid())
+  userId    String
+  listingId String
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Agency {
+  id          String    @id @default(cuid())
+  ownerId     String
+  name        String
+  description String
+  logo        String
+  email       String    @unique
+  phone       String?   @unique
+  address     String
+  city        String
+  countryId   Int
+  zipcode     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  country     Country   @relation(fields: [countryId], references: [value])
+  owner       User      @relation(fields: [ownerId], references: [id])
+  listings    Listing[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  email         String?    @unique
+  emailVerified DateTime?
+  image         String?
+  address       String?
+  city          String?
+  countryId     Int?
+  phone         String?    @unique
+  zipcode       String?
+  accountType   String     @default("client")
+  accounts      Account[]
+  favorites     Favorite[]
+  ratings       Rating[]
+  sessions      Session[]
+  country       Country?   @relation(fields: [countryId], references: [value])
+  agencies      Agency[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Country {
+  value     Int        @id @default(autoincrement())
+  label     String
+  iso2      String
+  iso3      String
+  localName String?    @map("local_name")
+  continent Continent?
+  users     User[]
+  listings  Listing[]
+  agencies  Agency[]
+
+  @@map("countries")
+}
+
+enum Continent {
+  Africa
+  Antarctica
+  Asia
+  Europe
+  Oceania
+  North_America  @map("North America")
+  South_America  @map("South America")
+
+  @@map("continents")
+}
