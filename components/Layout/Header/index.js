@@ -46,7 +46,7 @@ export default function Header() {
             <FlexDiv css={{ ai: 'center' }}>
               <NextLink href='/' passHref>
                 <Link>
-                  <Image width={150} src='/hf.svg' alt='logo' />
+                  <Image width={150} src='/hF.svg' alt='logo' />
                 </Link>
               </NextLink>
             </FlexDiv>
