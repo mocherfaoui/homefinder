@@ -1,18 +1,24 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
+import Footer from './Footer';
 import Header from './Header';
-import { Wrapper } from '../GlobalComponents';
+import { MainWrapper } from '../GlobalComponents';
 
 export default function Layout({ children, pageTitle }) {
+  const router = useRouter();
+  const { pathname } = router;
+  const isDiscussionsPage = pathname === '/my/discussions';
   return (
     <>
       <Head>
         <title>{`${pageTitle} | HomeFinder`}</title>
       </Head>
       <Header />
-      <Wrapper>
+      <MainWrapper>
         <main>{children}</main>
-      </Wrapper>
+      </MainWrapper>
+      {!isDiscussionsPage && <Footer />}
     </>
   );
 }

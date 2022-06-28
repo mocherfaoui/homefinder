@@ -15,7 +15,7 @@ export const config = {
 export default async function handler(req, res) {
   const token = await getToken({ req, secret });
   if (!token) {
-    res.status(401).json({ error: 'Unauthorized' });
+    res.status(401).json({ message: 'Unauthorized' });
   }
   if (req.method === 'POST') {
     const image = req.body;
@@ -50,10 +50,7 @@ export default async function handler(req, res) {
       }
 
       // Construct public URL
-      const url = `${process.env.SUPABASE_URL.replace(
-        '.co',
-        '.in'
-      )}/storage/v1/object/public/${data.Key}`;
+      const url = `${process.env.SUPABASE_URL}/storage/v1/object/public/${data.Key}`;
 
       return res.status(200).json({ url });
     } catch (e) {

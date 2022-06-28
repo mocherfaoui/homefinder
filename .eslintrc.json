@@ -1,11 +1,27 @@
 {
-  "extends": ["next/core-web-vitals", "next"],
+  "extends": ["eslint:recommended", "next", "next/core-web-vitals"],
   "parserOptions": {
     "sourceType": "module"
   },
   "env": { "es2021": true },
-  "plugins": ["simple-import-sort"],
+  "plugins": ["simple-import-sort", "unused-imports"],
   "rules": {
+    "no-unused-vars": "off",
+    "no-console": "warn",
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      { "props": "never", "children": "never" }
+    ],
     "react/no-unescaped-entities": "off",
     "simple-import-sort/imports": [
       "warn",
@@ -41,8 +57,8 @@
       }
     ],
     "simple-import-sort/exports": "warn",
-    "import/first": "error",
-    "import/newline-after-import": "error",
+    "import/first": "warn",
+    "import/newline-after-import": "warn",
     "import/no-duplicates": "error"
   }
 }

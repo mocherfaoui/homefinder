@@ -4,7 +4,7 @@ export const HeaderContainer = styled('header', {
   position: 'fixed',
   width: '100%',
   top: 0,
-  zIndex: 3000,
+  zIndex: 1000,
   backgroundColor: '$white',
   normalShadow: '$gray100',
   variants: {
@@ -28,6 +28,7 @@ export const NavBar = styled('div', {
   alignItems: 'center',
   '@md': {
     padding: '$10 0',
+    height: '88px',
   },
 });
 export const NavItem = styled(Link, {
@@ -43,7 +44,7 @@ export const NavContainer = styled('nav', {
         display: 'flex',
         flexDirection: 'column',
         [`& ${NavItem}`]: {
-          fontSize: '$sm',
+          fontSize: '$lg',
           padding: '$8 0',
         },
       },
@@ -64,11 +65,11 @@ export const CTAButtons = styled('div', {
 });
 export const NavMenuWrapper = styled('div', {});
 export const DropDownLink = styled(Link, {
-  w:'100%',
+  w: '100%',
   ai: 'center',
   gap: '$3',
-  br:'$md!important',
-  p:'$xs!important',
+  br: '$md!important',
+  p: '$xs!important',
   '&:hover': {
     bg: '$gray100',
     opacity: '1',

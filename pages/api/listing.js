@@ -1,48 +1,29 @@
-import { getToken } from 'next-auth/jwt';
+import { unstable_getServerSession } from 'next-auth/next';
 
 import prisma from '@/lib/prisma';
 
-const secret = process.env.SECRET;
+import { authOptions } from './auth/[...nextauth]';
+
 export default async function handler(req, res) {
-  const token = await getToken({ req, secret });
-  if (!token) {
-    res.status(401).json({ error: 'Unauthorized' });
+  const session = await unstable_getServerSession(req, res, authOptions);
+  if (!session) {
+    res.status(401).json({ message: 'Unauthorized' });
   }
   if (req.method === 'POST') {
-    const {
-      title,
-      imagesUrls,
-      description,
-      price,
-      bathrooms,
-      rooms,
-      address,
-      city,
-      zipcode,
-      country,
-      propertyType,
-      size,
-      status,
-    } = req.body;
-    const listing = await prisma.listing.create({
-      data: {
-        title,
-        images: { set: imagesUrls },
-        description,
-        price,
-        bathrooms,
-        rooms,
-        address,
-        city,
-        zipcode,
-        country: country.value,
-        propertyType,
-        size,
-        status,
-        ownerId: token.uid,
-      },
-    });
-    res.status(200).json({ listing });
+    try {
+      const { images, country, ...formData } = req.body;
+      const listing = await prisma.listing.create({
+        data: {
+          ...formData,
+          images: { set: images },
+          countryId: country.value,
+          ownerId: session.user.agencyId.toString(),
+        },
+      });
+      res.status(200).json(listing);
+    } catch (error) {
+      res.status(400).json({ message: 'Something went wrong' });
+    }
   }
   // HTTP method not supported!
   else {

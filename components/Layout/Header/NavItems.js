@@ -1,19 +1,17 @@
 import NextLink from 'next/link';
 
+import { navLinks } from '@/lib/constants';
+
 import { NavContainer, NavItem } from './HeaderStyles';
 
 export default function NavItems({ isOpen }) {
   return (
     <NavContainer isOpen={isOpen}>
-      <NextLink href="/" passHref>
-        <NavItem>Buy</NavItem>
-      </NextLink>
-      <NextLink href="/" passHref>
-        <NavItem>Rent</NavItem>
-      </NextLink>
-      <NextLink href="/" passHref>
-        <NavItem>Contact</NavItem>
-      </NextLink>
+      {navLinks.map(({ href, text }, index) => (
+        <NextLink key={index} href={href} passHref>
+          <NavItem block>{text}</NavItem>
+        </NextLink>
+      ))}
     </NavContainer>
   );
 }

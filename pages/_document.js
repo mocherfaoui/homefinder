@@ -12,8 +12,17 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
-        <Head>{CssBaseline.flush()}</Head>
+      <Html lang='en'>
+        <Head>
+          {CssBaseline.flush()}
+          <script
+            async
+            defer
+            data-website-id='db90c8d1-4d5a-4c66-a14d-860633f5b61b'
+            src='https://umami.cherfaoui.dev/umami.js'
+            data-cache='true'
+          ></script>
+        </Head>
         <body>
           <Main />
           <NextScript />

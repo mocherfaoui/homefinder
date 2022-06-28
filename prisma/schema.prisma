@@ -8,15 +8,15 @@ datasource db {
 }
 
 model Listing {
-  id           String          @id @default(cuid())
+  id           String       @id @default(cuid())
   images       String[]
   title        String
   description  String
   price        Float
   rooms        Int
   bathrooms    Int
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
   address      String
   city         String
   zipcode      String
@@ -25,41 +25,35 @@ model Listing {
   ownerId      String
   size         Float
   status       String
-  isSold       Boolean         @default(false)
-  isRented     Boolean         @default(false)
-  isSponsored  Boolean         @default(false)
-  isPublished  Boolean         @default(true)
-  owner        Agency          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  isSold       Boolean      @default(false)
+  isRented     Boolean      @default(false)
+  isSponsored  Boolean      @default(false)
+  isPublished  Boolean      @default(true)
+  country      Country      @relation(fields: [countryId], references: [value])
+  owner        Agency       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   bookmarkedBy Favorite[]
   ratings      Rating[]
-  options      ListingOption[]
-  country      Country         @relation(fields: [countryId], references: [value])
-
+  views        ViewCounter?
 }
 
-model ListingOption {
-  id          String    @id @default(cuid())
-  label       String
-  description String
-  image       String
-  listings    Listing[]
+model ViewCounter {
+  listingId  String  @id
+  totalViews Int     @default(1)
+  listing    Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model Favorite {
-  listingId String
-  userId    String
+  listingId String   @id
   addedAt   DateTime @default(now())
   listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([listingId, userId])
+  users     User[]
 }
 
 model Rating {
   id        String   @id @default(cuid())
   userId    String
   listingId String
-  rating    Int
+  rating    Float
   comment   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -71,7 +65,7 @@ model Agency {
   id          String    @id @default(cuid())
   ownerId     String
   name        String
-  description String
+  description String?
   logo        String
   email       String    @unique
   phone       String?   @unique
@@ -112,32 +106,34 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?    @unique
-  emailVerified DateTime?
-  image         String?
-  address       String?
-  city          String?
-  countryId     Int?
-  phone         String?    @unique
-  zipcode       String?
-  accountType   String     @default("client")
-  accounts      Account[]
-  favorites     Favorite[]
-  ratings       Rating[]
-  sessions      Session[]
-  country       Country?   @relation(fields: [countryId], references: [value])
-  agencies      Agency[]
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model User {
+  id            String       @id @default(cuid())
+  name          String?      @default("User")
+  email         String?      @unique
+  emailVerified DateTime?
+  image         String?
+  address       String?
+  city          String?
+  countryId     Int?
+  phone         String?      @unique
+  zipcode       String?
+  country       Country?     @relation(fields: [countryId], references: [value])
+  accountType   AccountType? @default(USER)
+  accounts      Account[]
+  agencies      Agency[]
+  favorites     Favorite[]
+  ratings       Rating[]
+  sessions      Session[]
+  messages      Message[]
+  discussions   Discussion[]
 }
 
 model Country {
@@ -147,11 +143,31 @@ model Country {
   iso3      String
   localName String?    @map("local_name")
   continent Continent?
-  users     User[]
-  listings  Listing[]
   agencies  Agency[]
+  listings  Listing[]
+  users     User[]
 
   @@map("countries")
+}
+
+model Discussion {
+  id           String    @id @default(cuid())
+  participants User[]
+  messages     Message[]
+  createdAt    DateTime  @default(now())
+}
+
+model Message {
+  id           String     @id @default(cuid())
+  discussionId String
+  authorId     String
+  content      String
+  isRead       Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  author       User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Discussion   Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+
 }
 
 enum Continent {
@@ -164,4 +180,10 @@ enum Continent {
   South_America  @map("South America")
 
   @@map("continents")
+}
+
+enum AccountType {
+  ADMIN
+  AGENCY
+  USER
 }
