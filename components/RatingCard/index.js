@@ -2,7 +2,7 @@ import { Rating } from 'react-simple-star-rating';
 import { Avatar, Card, Text } from '@nextui-org/react';
 
 import dayjs from '@/utils/dayjs';
-import timeAgo from '@/utils/timeago';
+import timeAgo from '@/utils/timeAgo';
 
 import { FlexDiv } from '../GlobalComponents';
 

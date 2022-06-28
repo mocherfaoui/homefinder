@@ -52,7 +52,7 @@ import TopButtons from '@/components/TopButtons';
 
 import dayjs from '@/utils/dayjs';
 import { fetcher } from '@/utils/fetcher';
-import timeAgo from '@/utils/timeago';
+import timeAgo from '@/utils/timeAgo';
 
 import { authOptions } from '../api/auth/[...nextauth]';
 
