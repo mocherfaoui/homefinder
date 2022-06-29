@@ -21,13 +21,13 @@ const transporter = nodemailer.createTransport({
 
 const emailsDir = path.resolve(process.cwd(), 'emails');
 
-const sendVerificationRequest = ({ identifier, url }) => {
+const sendVerificationRequest = async ({ identifier, url }) => {
   const emailFile = readFileSync(path.join(emailsDir, 'confirm-email.html'), {
     encoding: 'utf8',
   });
   const emailTemplate = Handlebars.compile(emailFile);
   try {
-    transporter.sendMail({
+    await transporter.sendMail({
       from: `"HomeFinder" ${process.env.EMAIL_FROM}`,
       to: identifier,
       subject: 'Your sign-in link for HomeFinder',
