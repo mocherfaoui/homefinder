@@ -26,20 +26,28 @@ const sendVerificationRequest = async ({ identifier, url }) => {
     encoding: 'utf8',
   });
   const emailTemplate = Handlebars.compile(emailFile);
-  try {
-    await transporter.sendMail({
-      from: `"HomeFinder" ${process.env.EMAIL_FROM}`,
-      to: identifier,
-      subject: 'Your sign-in link for HomeFinder',
-      html: emailTemplate({
-        base_url: process.env.NEXTAUTH_URL,
-        signin_url: url,
-        email: identifier,
-      }),
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(
+      {
+        from: `"HomeFinder" ${process.env.EMAIL_FROM}`,
+        to: identifier,
+        subject: 'Your sign-in link for HomeFinder',
+        html: emailTemplate({
+          base_url: process.env.NEXTAUTH_URL,
+          signin_url: url,
+          email: identifier,
+        }),
+      },
+      (err, info) => {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          resolve(info);
+        }
+      }
+    );
+  });
 };
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
