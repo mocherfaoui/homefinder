@@ -11,8 +11,9 @@ export default function DiscussionsPageLayout({ children }) {
         <Grid.Container
           css={{
             '@mdMax': {
-              minHeight: 'calc(100vh - 6.5rem)',
-              alignContent: 'baseline',
+              maxH: 'calc(100vh - 6.5rem)',
+              ai: 'baseline',
+              overflowY: 'clip',
             },
             '@md': {
               minHeight: 'calc(100vh - 7.5rem)',

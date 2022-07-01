@@ -305,7 +305,11 @@ export const ScrollToBottomButton = styled('div', {
   },
 });
 export const MessageDate = styled(Text, {
-  fontSize: '$xs',
+  fontSize: '0.67rem',
+  '@md': {
+    fontSize: '0.72rem',
+  },
+  lineHeight: 'normal',
   bg: '$gray50',
   color: '$gray800!important',
   px: '$4',

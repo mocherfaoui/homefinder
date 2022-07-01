@@ -160,7 +160,16 @@ export default function ChatArea({
           <div ref={bottom}></div>
         </Div>
       </Div>
-      <Div css={{ w: '100%', order: 3, '@md': { pl: '$9', mb: '$8' } }}>
+      <Div
+        css={{
+          w: '100%',
+          order: 3,
+          '@md': { pl: '$9', mb: '$8' },
+          '@mdMax': {
+            pb: '$2',
+          },
+        }}
+      >
         <Grid.Container
           as='form'
           xs={12}

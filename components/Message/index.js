@@ -21,7 +21,7 @@ export default function Message({ message, messages, index, loggedInUserId }) {
     <>
       {!isSameDay && (
         <Grid xs={12} css={{ mb: '$5' }} justify='center'>
-          <MessageDate span transform='uppercase' size='12.5px'>
+          <MessageDate span transform='uppercase'>
             {formatDate(message?.createdAt)}
           </MessageDate>
         </Grid>
