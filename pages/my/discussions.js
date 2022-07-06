@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useSWR from 'swr';
 
+import useIsClient from '@/hooks/useIsClient';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
 import DiscussionsPageL from '@/components/DiscussionsPage/DiscussionPageL';
@@ -19,48 +20,50 @@ export default function DiscussionsPage() {
   );
   const isLargerScreen = useMediaQuery('(min-width: 1280px)');
   const isSmallerScreen = useMediaQuery('(max-width: 1270px)');
+  const isClient = useIsClient();
   const [activeDiscussion, setActiveDiscussion] = useState('');
   const [receiver, setReceiver] = useState({
     name: '',
     image: '',
   });
-  const [isSSR, setIsSSR] = useState(true);
   const { data: messages } = useSWR(
     activeDiscussion ? `/api/message/${activeDiscussion}` : null,
-    fetcher
+    fetcher,
+    {
+      refreshInterval: 2000,
+    }
   );
   discussions?.sort(
     (a, b) =>
       dayjs(b.messages[0].createdAt).toDate() -
       dayjs(a.messages[0].createdAt).toDate()
   );
-  useEffect(() => {
-    setIsSSR(false);
-  }, []);
   return (
-    <>
-      {!isSSR && isLargerScreen && (
-        <DiscussionsPageL
-          messages={messages}
-          discussions={discussions}
-          receiver={receiver}
-          setReceiver={setReceiver}
-          activeDiscussion={activeDiscussion}
-          setActiveDiscussion={setActiveDiscussion}
-          isLoadingDiscussions={isLoadingDiscussions}
-        />
-      )}
-      {!isSSR && isSmallerScreen && (
-        <DiscussionsPageS
-          messages={messages}
-          discussions={discussions}
-          receiver={receiver}
-          setReceiver={setReceiver}
-          activeDiscussion={activeDiscussion}
-          setActiveDiscussion={setActiveDiscussion}
-          isLoadingDiscussions={isLoadingDiscussions}
-        />
-      )}
-    </>
+    isClient && (
+      <>
+        {isLargerScreen && (
+          <DiscussionsPageL
+            messages={messages}
+            discussions={discussions}
+            receiver={receiver}
+            setReceiver={setReceiver}
+            activeDiscussion={activeDiscussion}
+            setActiveDiscussion={setActiveDiscussion}
+            isLoadingDiscussions={isLoadingDiscussions}
+          />
+        )}
+        {isSmallerScreen && (
+          <DiscussionsPageS
+            messages={messages}
+            discussions={discussions}
+            receiver={receiver}
+            setReceiver={setReceiver}
+            activeDiscussion={activeDiscussion}
+            setActiveDiscussion={setActiveDiscussion}
+            isLoadingDiscussions={isLoadingDiscussions}
+          />
+        )}
+      </>
+    )
   );
 }
