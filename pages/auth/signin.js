@@ -87,11 +87,11 @@ export default function SignIn({ providers }) {
       if (error) {
         throw new Error(error);
       }
-      setShowModal(true);
       toast.success('Magic link successfully sent', {
         id: toastId,
         position: 'top-center',
       });
+      setShowModal(true);
     } catch (error) {
       console.log(error);
       toast.error('Unable to send magic link', {

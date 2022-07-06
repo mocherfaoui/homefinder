@@ -3,7 +3,13 @@ import { MdOutlineLocationOn } from 'react-icons/md';
 import NextLink from 'next/link';
 import { Card, Text } from '@nextui-org/react';
 
-import { Div, FlexDiv, FlexText, HeroIcon } from '../GlobalComponents';
+import {
+  Div,
+  FlexDiv,
+  FlexText,
+  HeroIcon,
+  TextTruncate,
+} from '../GlobalComponents';
 import TopButtons from '../TopButtons';
 
 export default function ListingCard({ listing }) {
@@ -102,7 +108,7 @@ export default function ListingCard({ listing }) {
                 <HeroIcon>
                   <MdOutlineLocationOn />
                 </HeroIcon>
-                <Text
+                <TextTruncate
                   css={{
                     fs: 'inherit',
                     color: 'inherit',
@@ -110,14 +116,13 @@ export default function ListingCard({ listing }) {
                   }}
                 >
                   {listing?.city}, {listing?.country?.label}
-                </Text>
+                </TextTruncate>
               </FlexDiv>
               <FlexText
                 as='div'
                 css={{
                   fs: '0.75rem',
                   color: '$gray700',
-                  w: '100%',
                 }}
               >
                 <FlexText css={{ gap: '$2', fs: 'inherit', color: 'inherit' }}>

@@ -428,7 +428,7 @@ export default function ListingPage({
                   )} */
                   name={listing?.owner.name}
                   src={listing?.owner.logo}
-                  size='xl'
+                  size='lg'
                   css={{ pl: 0 }}
                   description={`Member since ${dayjs(
                     listing?.owner.createdAt
@@ -494,7 +494,7 @@ export default function ListingPage({
                           }
                           auto
                         >
-                          View Discussion
+                          Chat
                         </Button>
                       </NextLink>
                     </Grid>
