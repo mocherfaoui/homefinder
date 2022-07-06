@@ -5,6 +5,7 @@ import { SearchIcon } from '@heroicons/react/outline';
 import { Button, Card, Grid, Input, Text } from '@nextui-org/react';
 
 import { propertyTypes } from '@/lib/constants';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 import { PurchaseTypeButton } from './HeroAreaStyles';
 import { Label, NormalSelect } from '../GlobalComponents';
@@ -13,6 +14,8 @@ export default function HeroArea() {
   const [purchaseType, setPurchaseType] = useState('for-rent');
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
+  const isMobile = useMediaQuery('(max-width: 650px)');
+
   const onSearchSubmit = (data) => {
     Router.push({
       pathname: '/search',
@@ -38,30 +41,34 @@ export default function HeroArea() {
   );
   return (
     <Grid.Container as='section' direction='row'>
-      <Grid xs={0} sm={12}>
-        <Card
-          variant='flat'
-          css={{
-            h: '100%',
-            backgroundColor: '#E3EEF1',
-            flexDirection: 'row',
-          }}
-        >
-          <Card.Body css={{ p: '$5 $15', width: '60%' }}>
-            <HeroAreaText desktop />
-          </Card.Body>
-          <Card.Image
-            showSkeleton
-            src='/hero-area-desktop.png'
-            height={500}
-            width={600}
-            objectFit='cover'
-          />
-        </Card>
-      </Grid>
-      <Grid direction='column' xs={12} sm={0}>
-        <HeroAreaText />
-      </Grid>
+      {!isMobile && (
+        <Grid xs={0} sm={12}>
+          <Card
+            variant='flat'
+            css={{
+              h: '100%',
+              backgroundColor: '#E3EEF1',
+              flexDirection: 'row',
+            }}
+          >
+            <Card.Body css={{ p: '$5 $15', width: '60%' }}>
+              <HeroAreaText desktop />
+            </Card.Body>
+            <Card.Image
+              showSkeleton
+              src='/hero-area-desktop.png'
+              height={500}
+              width={600}
+              objectFit='cover'
+            />
+          </Card>
+        </Grid>
+      )}
+      {isMobile && (
+        <Grid direction='column' xs={12} sm={0}>
+          <HeroAreaText />
+        </Grid>
+      )}
       <Grid.Container
         css={{
           m: '-$28 $15 $10',
@@ -133,7 +140,7 @@ export default function HeroArea() {
                   },
                 }}
               >
-                 <Grid xs={12} sm={2.7}>
+                <Grid xs={12} sm={2.7}>
                   <Input
                     label='City'
                     placeholder='Safi'
