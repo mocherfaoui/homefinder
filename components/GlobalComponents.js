@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { keyframes, styled, Text } from '@nextui-org/react';
+import { Grid, keyframes, styled, Text } from '@nextui-org/react';
 
 export const MainWrapper = styled('div', {
   w: '100%',
@@ -318,4 +318,37 @@ export const MessageDate = styled(Text, {
   br: '$sm',
   fontWeight: '$medium',
   border: '$borderWeights$normal solid $border',
+});
+export const FiltersArrow = styled(Grid, {
+  p: 0,
+  position: 'absolute',
+  top: 0,
+  height: '100%',
+  ai: 'center',
+  variants: {
+    arrow: {
+      left: {
+        left: '5px',
+        '&::after': {
+          zIndex: 200,
+          content: '',
+          height: '60%',
+          width: '32px',
+          background:
+            'linear-gradient(to right,$white,$gray50 10%,rgba(249,249,249,0) 90%)',
+        },
+      },
+      right: {
+        right: '5px',
+        '&::before': {
+          zIndex: 200,
+          content: '',
+          height: '60%',
+          width: '32px',
+          background:
+            'linear-gradient(to left,$white,$gray50 10%,rgba(249,249,249,0) 90%)',
+        },
+      },
+    },
+  },
 });

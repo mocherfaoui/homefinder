@@ -19,8 +19,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { propertyTypes } from '@/lib/constants';
 
 import {
-  ArrowIcon,
   FilterContainer,
+  FiltersArrow,
   FilterSliderContainer,
   FlexDiv,
   FlexText,
@@ -94,22 +94,40 @@ export default function SearchAndFilters({ agencyId, status }) {
   }, [router.isReady]);
   return (
     <Grid.Container>
-      <Grid xs={12}>
-        <Grid.Container gap={1.5} css={{ px: 0 }}>
+      <Grid xs={12} css={{ position: 'relative' }}>
+        <Grid.Container
+          gap={1.5}
+          css={{
+            px: 0,
+            position: 'relative',
+            '@mdMax': {
+              jc: 'center',
+            },
+          }}
+        >
           <Grid xs={0} sm={0.8}>
             <Text span weight='medium' size='1.1rem' css={{ my: 'auto' }}>
               Filters:
             </Text>
           </Grid>
-          <Grid xs={1} sm={0} css={{ pl: 0 }}>
-            <ArrowIcon color='text'>
+          <FiltersArrow arrow='left' xs={2} sm={0}>
+            <FlexText color='text'>
               <FlexText span className='swiper-button-prev'>
                 <HeroIcon>
                   <ChevronLeftIcon />
                 </HeroIcon>
               </FlexText>
-            </ArrowIcon>
-          </Grid>
+            </FlexText>
+          </FiltersArrow>
+          <FiltersArrow arrow='right' xs={2} sm={0}>
+            <FlexText color='text'>
+              <FlexText span className='swiper-button-next'>
+                <HeroIcon>
+                  <ChevronRightIcon />
+                </HeroIcon>
+              </FlexText>
+            </FlexText>
+          </FiltersArrow>
           <Grid
             xs={10}
             sm={11}
@@ -336,22 +354,13 @@ export default function SearchAndFilters({ agencyId, status }) {
               </Swiper>
             </FilterSliderContainer>
           </Grid>
-          <Grid xs={1} sm={0} css={{ pr: 0 }}>
-            <ArrowIcon color='text'>
-              <FlexText span className='swiper-button-next'>
-                <HeroIcon>
-                  <ChevronRightIcon />
-                </HeroIcon>
-              </FlexText>
-            </ArrowIcon>
-          </Grid>
         </Grid.Container>
       </Grid>
       <Grid xs={12} css={{ py: '$9' }}>
         <Grid.Container gap={2} css={{ px: 0 }}>
           {searchResult?.map((results) =>
             results.map((listing) => (
-              <Grid xs={6} sm={3} key={listing.id}>
+              <Grid xs={12} sm={3} key={listing.id}>
                 <ListingCard listing={listing} />
               </Grid>
             ))
@@ -365,7 +374,7 @@ export default function SearchAndFilters({ agencyId, status }) {
           )}
           {isLoadingInitialData &&
             [...Array(12)].map((_, i) => (
-              <Grid key={i} xs={6} sm={3} css={{ d: 'block!important' }}>
+              <Grid key={i} xs={12} sm={3} css={{ d: 'block!important' }}>
                 <Skeleton height={300} borderRadius={14} />
               </Grid>
             ))}
