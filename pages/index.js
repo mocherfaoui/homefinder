@@ -1,5 +1,4 @@
 import { Divider, Grid, Text } from '@nextui-org/react';
-import { unstable_getServerSession } from 'next-auth/next';
 
 import prisma from '@/lib/prisma';
 import useIsClient from '@/hooks/useIsClient';
@@ -12,9 +11,7 @@ import Layout from '@/components/Layout';
 import ListingsCarousel from '@/components/ListingsCarousel';
 import PopularListings from '@/components/PopularListings';
 
-import { authOptions } from './api/auth/[...nextauth]';
-
-export default function Home({ recentListings, userListings }) {
+export default function Home({ recentListings }) {
   const isClient = useIsClient();
   return (
     <Layout pageTitle='Homepage'>
@@ -36,14 +33,13 @@ export default function Home({ recentListings, userListings }) {
             <Features />
           </Wrapper>
           <PopularListings />
-          <AboveFooterCard userListings={userListings} />
+          <AboveFooterCard />
         </>
       )}
     </Layout>
   );
 }
-export const getServerSideProps = async ({ req, res }) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
+export const getStaticProps = async () => {
   const recentListings = await prisma.listing.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -57,19 +53,10 @@ export const getServerSideProps = async ({ req, res }) => {
     },
     take: 6,
   });
-  const userListings = await prisma.listing.count({
-    where: {
-      ownerId: session?.user?.agencyId ?? '',
-    },
-    select: {
-      _all: true,
-    },
-  });
   return {
     props: {
-      session,
-      userListings: JSON.parse(JSON.stringify(userListings)),
       recentListings: JSON.parse(JSON.stringify(recentListings)),
     },
+    revalidate: 5,
   };
 };

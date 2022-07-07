@@ -3,12 +3,19 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Button, Card, Grid, Input, Link, Text } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
+import useSWR from 'swr';
+
+import { fetcher } from '@/utils/fetcher';
 
 import { FlexDiv, Wrapper } from '../GlobalComponents';
 
-export default function AboveFooterCard({ userListings }) {
+export default function AboveFooterCard() {
   const { data: session } = useSession();
-  const userHasListings = userListings && userListings?._all > 0;
+  const { data: userListings, isLoadingUserListings } = useSWR(
+    '/api/user/listings',
+    fetcher
+  );
+  const userHasListings = userListings && userListings?.length > 0;
   const [email, setEmail] = useState('');
   const router = useRouter();
   const handleOnSubmit = (e) => {
@@ -117,7 +124,7 @@ export default function AboveFooterCard({ userListings }) {
                         )}
                       </li>
                       <li>
-                        {!userHasListings ? (
+                        {!userHasListings && !isLoadingUserListings ? (
                           <>
                             <NextLink href='/listing/new' passHref>
                               <Link underline>start selling</Link>
