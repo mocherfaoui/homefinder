@@ -36,7 +36,6 @@ export default function AgencyForm({
       const newAgency = { ...data, logo: logoUrl };
       await onSubmit(newAgency);
     } catch (error) {
-      console.log(error);
       toast.error('An error occurred.', {
         id: toastId,
       });

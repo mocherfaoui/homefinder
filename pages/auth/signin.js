@@ -93,7 +93,6 @@ export default function SignIn({ providers }) {
       });
       setShowModal(true);
     } catch (error) {
-      console.log(error);
       toast.error('Unable to send magic link', {
         id: toastId,
         position: 'top-center',

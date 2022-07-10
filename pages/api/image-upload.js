@@ -45,7 +45,6 @@ export default async function handler(req, res) {
         });
 
       if (uploadError) {
-        console.log(uploadError);
         throw new Error('Unable to upload image to storage');
       }
 

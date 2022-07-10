@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Rating } from 'react-simple-star-rating';
 import NextLink from 'next/link';
 import { ArrowSmLeftIcon } from '@heroicons/react/outline';
@@ -61,7 +62,7 @@ export default function RatingsPage({
       });
       await mutate();
     } catch (error) {
-      console.error(error);
+      toast.error('An error occured');
     } finally {
       setSubmitting(false);
       setComment('');

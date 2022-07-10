@@ -18,7 +18,6 @@ export default function MyPersonaProfilePage({ countries }) {
   });
   const [logoUrl, setLogoUrl] = useState(initialValues?.image ?? '');
   const { register, handleSubmit, control } = useForm({});
-  console.log(logoUrl);
   const handleOnSubmit = async (data) => {
     const newData = { ...data, image: logoUrl };
     let toastId;
@@ -38,7 +37,6 @@ export default function MyPersonaProfilePage({ countries }) {
       toast.error('An error occured', {
         id: toastId,
       });
-      console.log(error);
     } finally {
       toast.success('Information Updated!', {
         id: toastId,
@@ -165,7 +163,7 @@ export default function MyPersonaProfilePage({ countries }) {
     </MyPagesLayout>
   );
 }
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const { countries } = await getCountries();
 
   return {
