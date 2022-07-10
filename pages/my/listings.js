@@ -33,7 +33,7 @@ export default function MyListingsPage() {
           </Grid.Container>
         </Grid>
       ))}
-      {!userListings && !isLoading && (
+      {!userListings?.length && !isLoading && (
         <Grid xs={12}>
           <NoAgencyWarning />
         </Grid>
