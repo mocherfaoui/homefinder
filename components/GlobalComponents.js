@@ -110,6 +110,8 @@ export const TopButtonsContainer = styled('div', {
     p: '$4',
     color: '$gray800',
     borderColor: '$gray400',
+    w: 'auto!important',
+    minWidth: 'min-content!important',
   },
   '& button:hover': {
     bg: '$gray50',

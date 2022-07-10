@@ -36,11 +36,7 @@ export default function TopButtons({
     const isFavorite =
       userFavoriteListings?.length &&
       userFavoriteListings?.find((listing) => listing.listingId === listingId);
-    if (isFavorite) {
-      setIsListingFavorite(true);
-    } else {
-      setIsListingFavorite(false);
-    }
+    setIsListingFavorite(isFavorite);
   }, [userFavoriteListings]);
 
   const handleFavorite = async () => {
@@ -55,7 +51,6 @@ export default function TopButtons({
         await mutate();
         toastId = toast.success('Listing removed from favorites');
       } catch (error) {
-        console.log(error);
         toast.error('An error occured', {
           id: toastId,
         });
@@ -69,7 +64,6 @@ export default function TopButtons({
         });
         toastId = toast.success('Listing added to favorites');
       } catch (error) {
-        console.log(error);
         toast.error('An error occured', {
           id: toastId,
         });
@@ -77,7 +71,7 @@ export default function TopButtons({
     }
   };
   const handleShare = async () => {
-    if (navigator.share) {
+    if (navigator.canShare(shareDetails)) {
       await navigator.share(shareDetails);
     } else {
       console.log('Share not supported');
@@ -95,7 +89,6 @@ export default function TopButtons({
       });
       await mutate();
     } catch (error) {
-      console.error(error);
       toast.error('An error occured', {
         id: toastId,
       });
@@ -120,7 +113,7 @@ export default function TopButtons({
               <ShareIcon />
             </HeroIcon>
           }
-          title="Share this listing"
+          title='Share this listing'
         />
       )}
       {!isListingOwner && status === 'authenticated' && (
