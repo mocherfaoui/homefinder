@@ -119,28 +119,32 @@ export default function HeroArea() {
         >
           <Card
             variant='bordered'
-            css={{ p: '$10', normalShadow: '$gray100', '@xsMax': { pt: 0 } }}
+            css={{
+              pl: '$9',
+              pr: '$5',
+              py: '$5',
+              normalShadow: '$gray100',
+              '@xsMax': { pt: 0 },
+            }}
           >
-            <Card.Body css={{ p: 0 }}>
+            <Card.Body css={{ '@xsMax': { pr: 0, pb: '$6' } }}>
               <Grid.Container
                 onSubmit={handleSubmit(handleSubmit(onSearchSubmit))}
                 as='form'
                 css={{
                   '& label, input': { fontSize: '1rem' },
                   '& label': { fontWeight: '$bold' },
-                  '@md': {
-                    '& .nextui-input-wrapper:not(last-child)': {
-                      mr: '$5!important',
-                    },
-                  },
+                  p: 0,
+                  w: '100%',
                   '@xsMax': {
                     '& > div': {
-                      mt: '$10!important',
+                      px: 0,
                     },
                   },
                 }}
+                gap={2}
               >
-                <Grid xs={12} sm={2.7}>
+                <Grid xs={12} sm={2.5}>
                   <Input
                     label='City'
                     placeholder='Safi'
@@ -153,7 +157,7 @@ export default function HeroArea() {
                     //helperText={errors.location}
                   />
                 </Grid>
-                <Grid xs={12} sm={2.7}>
+                <Grid xs={12} sm={2.5}>
                   <Input
                     label='Country'
                     placeholder='Morocco'
@@ -166,7 +170,7 @@ export default function HeroArea() {
                     //helperText={errors.location}
                   />
                 </Grid>
-                <Grid xs={12} sm={2.7}>
+                <Grid xs={12} sm={2.5}>
                   <Input
                     label='Max Price'
                     placeholder='$'
@@ -179,7 +183,7 @@ export default function HeroArea() {
                     })}
                   />
                 </Grid>
-                <Grid xs={12} sm={2.7} direction='column'>
+                <Grid xs={12} sm={2.5} direction='column'>
                   <Label>Property Type</Label>
                   <NormalSelect
                     defaultValue='all'
@@ -202,11 +206,14 @@ export default function HeroArea() {
                     ))}
                   </NormalSelect>
                 </Grid>
-                <Grid xs={12} sm={1.2} css={{ ai: 'end' }}>
+                <Grid xs={12} sm={2} css={{ ai: 'end', px: 0 }}>
                   <Button
                     auto
                     type='submit'
-                    css={{ w: '100%', '& > span': { position: 'initial' } }}
+                    css={{
+                      w: '100%',
+                      '& > span': { position: 'initial' },
+                    }}
                     size='md'
                     icon={<SearchIcon height={20} />}
                   />

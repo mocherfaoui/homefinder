@@ -13,8 +13,9 @@ export default function SendMessageModal({
   listing,
   setMessageSent,
 }) {
-  const [message, setMessage] = useState('');
-  //`Hi, I'm interested in your ${listing.title} (#${listing.id})`
+  const [message, setMessage] = useState(
+    `Hi, I'm interested in your ${listing.title} (#${listing.id})`
+  );
   const [sending, setSending] = useState(false);
   const handleDiscussionCreate = async () => {
     try {

@@ -107,6 +107,7 @@ export default function ListingPage({
     }
     let timoutId = setTimeout(() => collectView(), 1500);
     return () => clearTimeout(timoutId);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeModal = () => {

@@ -55,7 +55,7 @@ export const NormalSelect = styled('select', {
   background: '$accents0',
   br: '$md',
   h: '40px',
-
+  w: '100%',
   '& option': {
     br: '$md',
   },

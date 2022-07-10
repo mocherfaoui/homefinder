@@ -6,7 +6,7 @@ export const HeaderContainer = styled('header', {
   top: 0,
   zIndex: 1000,
   backgroundColor: '$white',
-  normalShadow: '$gray100',
+  boxShadow: '$xs',
   variants: {
     isOpen: {
       true: {
