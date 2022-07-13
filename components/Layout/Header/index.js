@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
+import Image from 'next/future/image';
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { Image, Link } from '@nextui-org/react';
 import { Cross as Hamburger } from 'hamburger-react';
 
 import { FlexDiv, Wrapper } from '@/components/GlobalComponents';
+
+import logo from '@/public/hF.svg';
 
 import { HeaderContainer, NavBar } from './HeaderStyles';
 import NavItems from './NavItems';
@@ -43,11 +45,9 @@ export default function Header() {
               toggled={isOpen}
               toggle={handleToggle}
             />
-            <FlexDiv css={{ ai: 'center' }}>
+            <FlexDiv css={{ ai: 'center', cursor: 'pointer' }}>
               <NextLink href='/' passHref>
-                <Link>
-                  <Image width={150} src='/hF.svg' alt='logo' />
-                </Link>
+                <Image width={150} src={logo} alt='logo' priority />
               </NextLink>
             </FlexDiv>
             <NavMenu />
