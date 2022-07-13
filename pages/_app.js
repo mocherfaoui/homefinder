@@ -30,6 +30,18 @@ const globalStyles = globalCss({
       scrollPaddingTop: '$32',
     },
   },
+  body: {
+    scrollbarColor: ' $colors$gray600 $colors$gray300',
+    scrollbarWidth: 'thin',
+    scrollbarGutter: 'stable',
+    '&::-webkit-scrollbar': {
+      width: '0.7rem',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      bg: '$gray500',
+      br: '$md',
+    },
+  },
 });
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   globalStyles();
