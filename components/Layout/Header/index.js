@@ -47,7 +47,7 @@ export default function Header() {
             />
             <FlexDiv css={{ ai: 'center', cursor: 'pointer' }}>
               <NextLink href='/' passHref>
-                <Image width={150} src={logo} alt='logo' priority />
+                <Image width={150} height={50} src={logo} alt='logo' priority />
               </NextLink>
             </FlexDiv>
             <NavMenu />
