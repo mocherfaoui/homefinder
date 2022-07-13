@@ -107,7 +107,7 @@ export const TopButtonsContainer = styled('div', {
     borderWidth: '$light',
     bg: 'transparent',
     br: '$rounded',
-    p: '$4',
+    p: '.56rem',
     color: '$gray800',
     borderColor: '$gray400',
     w: 'auto!important',

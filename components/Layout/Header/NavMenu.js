@@ -96,17 +96,13 @@ export default function NavMenu() {
             </Grid>
             <Popover placement='bottom-right'>
               <Popover.Trigger>
-                <Grid.Container alignItems='center' justify='end'>
-                  <Grid xs={12}>
-                    <Avatar
-                      css={{ cursor: 'pointer' }}
-                      size='md'
-                      src={session?.user.image}
-                      referrerPolicy='no-referrer'
-                      text={session?.user?.name?.split(' ')[0][0]}
-                    />
-                  </Grid>
-                </Grid.Container>
+                <Avatar
+                  pointer
+                  size='md'
+                  src={session?.user.image}
+                  referrerPolicy='no-referrer'
+                  text={session?.user?.name?.split(' ')[0][0]}
+                />
               </Popover.Trigger>
               <Popover.Content>
                 <Card>
