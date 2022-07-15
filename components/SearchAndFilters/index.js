@@ -375,7 +375,7 @@ export default function SearchAndFilters({ agencyId, status }) {
           {isLoadingInitialData &&
             [...Array(12)].map((_, i) => (
               <Grid key={i} xs={12} sm={3} css={{ d: 'block!important' }}>
-                <Skeleton height={300} borderRadius={14} />
+                <Skeleton height={290} borderRadius={14} />
               </Grid>
             ))}
         </Grid.Container>

@@ -89,7 +89,7 @@ export default function AgencyForm({
         />
       </Grid>
       <Grid.Container justify='space-between'>
-        <Grid xs={5}>
+        <Grid xs={5.8}>
           <Input
             label='Email'
             fullWidth
@@ -99,7 +99,7 @@ export default function AgencyForm({
             placeholder='email@example.com'
           />
         </Grid>
-        <Grid xs={5}>
+        <Grid xs={5.8}>
           <Input
             label='Phone Number'
             fullWidth

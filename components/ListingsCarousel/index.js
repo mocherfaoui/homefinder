@@ -66,7 +66,7 @@ export default function ListingsCarousel({ listings, uniqueId = 'sw' }) {
             {!listings?.length &&
               [...Array(4)].map((_, index) => (
                 <SwiperSlide key={index}>
-                  <Skeleton height={320} borderRadius={14} />
+                  <Skeleton height={290} borderRadius={14} />
                 </SwiperSlide>
               ))}
           </Swiper>

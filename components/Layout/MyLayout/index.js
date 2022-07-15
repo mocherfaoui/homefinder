@@ -28,7 +28,7 @@ export default function MyPagesLayout({ pageTitle, children }) {
                 },
               }}
             >
-              <Grid xs={12} css={{ ai: 'baseline' }}>
+              <Grid xs={0} sm={12} css={{ ai: 'baseline' }}>
                 <User
                   css={{ p: 0 }}
                   src={session?.user.image}
@@ -40,14 +40,14 @@ export default function MyPagesLayout({ pageTitle, children }) {
               <Grid xs={0} sm={12}>
                 <Divider css={{ my: '$11' }} />
               </Grid>
-              <Grid xs={12} sm={0} css={{ mt: '$11' }}>
+              <Grid xs={12} sm={0} css={{ mt: '$6' }}>
                 <Collapse
                   bordered
                   title='Menu'
                   css={{
                     w: '100%',
                     '& .nextui-collapse-title': {
-                      fs: '$sm',
+                      fs: '$lg',
                     },
                   }}
                 >

@@ -354,3 +354,12 @@ export const FiltersArrow = styled(Grid, {
     },
   },
 });
+export const AboveContentTitle = styled(Text, {
+  fontWeight: '$bold',
+  ta: 'center',
+  fs: '$lg',
+  mb: '$7!important',
+  '@md': {
+    fs: '$xl4',
+  },
+});

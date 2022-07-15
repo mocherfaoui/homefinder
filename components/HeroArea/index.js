@@ -83,29 +83,15 @@ export default function HeroArea() {
           <Button.Group auto size='lg' css={{ m: 0 }}>
             <PurchaseTypeButton
               onClick={() => setPurchaseType('for-rent')}
-              css={{
-                bblr: 0,
-                bbrr: 0,
-                btrr: 0,
-                backgroundColor:
-                  purchaseType === 'for-rent'
-                    ? '$yellow400!important'
-                    : '$gray400!important',
-              }}
+              css={{ btrr: 0 }}
+              purchaseType={purchaseType === 'for-rent' ? 'rent' : ''}
             >
               Rent
             </PurchaseTypeButton>
             <PurchaseTypeButton
               onClick={() => setPurchaseType('for-sale')}
-              css={{
-                bbrr: 0,
-                bblr: 0,
-                btlr: 0,
-                backgroundColor:
-                  purchaseType === 'for-sale'
-                    ? '$yellow400!important'
-                    : '$gray400!important',
-              }}
+              css={{ btlr: 0 }}
+              purchaseType={purchaseType === 'for-sale' ? 'sale' : ''}
             >
               Buy
             </PurchaseTypeButton>
@@ -121,9 +107,10 @@ export default function HeroArea() {
             variant='bordered'
             css={{
               pl: '$9',
-              pr: '$5',
+              pr: '$8',
               py: '$5',
               normalShadow: '$gray100',
+              '@md': { pr: '$4' },
               '@xsMax': { pt: 0 },
             }}
           >
@@ -142,7 +129,7 @@ export default function HeroArea() {
                     },
                   },
                 }}
-                gap={2}
+                gap={1.4}
               >
                 <Grid xs={12} sm={2.5}>
                   <Input
@@ -183,7 +170,7 @@ export default function HeroArea() {
                     })}
                   />
                 </Grid>
-                <Grid xs={12} sm={2.5} direction='column'>
+                <Grid xs={12} sm={3} direction='column'>
                   <Label>Property Type</Label>
                   <NormalSelect
                     defaultValue='all'
@@ -206,15 +193,11 @@ export default function HeroArea() {
                     ))}
                   </NormalSelect>
                 </Grid>
-                <Grid xs={12} sm={2} css={{ ai: 'end', px: 0 }}>
+                <Grid xs={12} sm={1.5} css={{ ai: 'end' }}>
                   <Button
                     auto
                     type='submit'
-                    css={{
-                      w: '100%',
-                      '& > span': { position: 'initial' },
-                    }}
-                    size='md'
+                    css={{ minWidth: '100%' }}
                     icon={<SearchIcon height={20} />}
                   />
                 </Grid>

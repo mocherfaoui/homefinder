@@ -10,11 +10,10 @@ export const HeaderContainer = styled('header', {
   variants: {
     isOpen: {
       true: {
-        position: 'fixed',
         height: '100vh',
         '@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none)':
           {
-            backgroundColor: '$white',
+            backgroundColor: 'rgb(94 96 98 / 6%)',
             backdropFilter: 'saturate(180%) blur(20px)',
           },
       },
@@ -43,9 +42,13 @@ export const NavContainer = styled('nav', {
       true: {
         display: 'flex',
         flexDirection: 'column',
+        borderTop: '1px solid $gray800',
+        p: '$10 $20',
         [`& ${NavItem}`]: {
-          fontSize: '$lg',
-          padding: '$8 0',
+          fontSize: '$xl2',
+          padding: '$15 0',
+          jc: 'center',
+          alignItems: 'center',
         },
       },
       false: {

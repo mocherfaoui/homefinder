@@ -126,7 +126,7 @@ export default function MyPersonaProfilePage({ countries }) {
                 {...register('city', { required: true })}
               />
             </Grid>
-            <Grid xs={6} sm={2}>
+            <Grid xs={4} sm={2}>
               <Input
                 label='Zipcode'
                 fullWidth
@@ -135,7 +135,7 @@ export default function MyPersonaProfilePage({ countries }) {
                 {...register('zipcode', { required: true })}
               />
             </Grid>
-            <Grid xs={6} sm={4} direction='column'>
+            <Grid xs={8} sm={4} direction='column'>
               <Label>Country</Label>
               <Controller
                 control={control}
