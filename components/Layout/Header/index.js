@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/future/image';
 import Head from 'next/head';
 import NextLink from 'next/link';
+import { Link } from '@nextui-org/react';
 import { Cross as Hamburger } from 'hamburger-react';
 
 import { FlexDiv, Wrapper } from '@/components/GlobalComponents';
@@ -47,7 +48,15 @@ export default function Header() {
             />
             <FlexDiv css={{ ai: 'center', cursor: 'pointer' }}>
               <NextLink href='/' passHref>
-                <Image width={150} height={50} src={logo} alt='logo' priority />
+                <Link>
+                  <Image
+                    width={150}
+                    height={50}
+                    src={logo}
+                    alt='logo'
+                    priority
+                  />
+                </Link>
               </NextLink>
             </FlexDiv>
             <NavMenu />
