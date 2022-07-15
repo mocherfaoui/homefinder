@@ -10,9 +10,10 @@ import { fetcher } from '@/utils/fetcher';
 import { FlexDiv, Wrapper } from '../GlobalComponents';
 
 export default function AboveFooterCard() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const isUserAuthenticated = status === 'authenticated';
   const { data: userListings, isLoadingUserListings } = useSWR(
-    '/api/user/listings',
+    isUserAuthenticated ? '/api/user/listings' : '',
     fetcher
   );
   const userHasListings = userListings && userListings?.length > 0;
@@ -115,12 +116,12 @@ export default function AboveFooterCard() {
                         {!session?.user?.agencyId ? (
                           <>
                             <NextLink href='/agency/new' passHref>
-                              <Link underline>create </Link>
+                              <Link underline>switch </Link>
                             </NextLink>{' '}
-                            an agency account
+                            to an agency account
                           </>
                         ) : (
-                          <strike>create an agency account</strike>
+                          <strike>switch to an agency account</strike>
                         )}
                       </li>
                       <li>
