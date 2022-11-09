@@ -61,20 +61,17 @@ export const NavContainer = styled('nav', {
     gap: '$15',
   },
 });
-export const CTAButtons = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '$6',
-});
+
 export const NavMenuWrapper = styled('div', {});
 export const DropDownLink = styled(Link, {
   w: '100%',
+  maxW: 'unset',
   ai: 'center',
   gap: '$3',
   br: '$md!important',
   p: '$xs!important',
   '&:hover': {
-    bg: '$gray100',
+    bg: '$gray100!important',
     opacity: '1',
   },
 });

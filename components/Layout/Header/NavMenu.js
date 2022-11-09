@@ -63,7 +63,7 @@ export default function NavMenu() {
                 </Button>
               </NextLink>
             </Grid>
-            <Popover placement='bottom-right' disableAnimation>
+            <Popover placement='bottom-right'>
               <Popover.Trigger>
                 <Avatar
                   pointer
