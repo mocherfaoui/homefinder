@@ -7,9 +7,9 @@ export const MainWrapper = styled('div', {
     p: '0',
   },
   main: {
-    pt: '6.5rem',
+    pt: '1.7rem',
     '@md': {
-      pt: '7.5rem',
+      pt: '2.5rem',
     },
   },
 });
@@ -91,12 +91,16 @@ export const PropertyFeatures = styled(FlexText, {
     fs: '$lg',
   },
   fontWeight: '$semibold',
+  '& > span': {
+    color: '$gray700',
+  },
 });
 export const ImageGalleryContainer = styled('div', {
   '& .swiper > .swiper-pagination': {
     p: '$5',
     br: '$sm',
     bg: '$white',
+    border: '$borderWeights$light solid $border',
   },
 });
 export const TopButtonsContainer = styled('div', {
@@ -185,7 +189,7 @@ export const ArrowIcon = styled(FlexText, {
   cursor: 'pointer',
   position: 'absolute',
   zIndex: 10,
-  top: '50%',
+  top: '45%',
   '&:hover': {
     bg: '$gray50',
     borderColor: '$gray500',
@@ -319,7 +323,7 @@ export const MessageDate = styled(Text, {
   m: '0!important',
   br: '$sm',
   fontWeight: '$medium',
-  border: '$borderWeights$normal solid $border',
+  border: '$borderWeights$normal solid $gray300',
 });
 export const FiltersArrow = styled(Grid, {
   p: 0,

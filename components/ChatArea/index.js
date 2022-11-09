@@ -196,7 +196,7 @@ export default function ChatArea({
               onKeyDown={onEnterPress}
             />
           </Grid>
-          <Grid xs={2} md={1} justify='center'>
+          <Grid xs={2} md justify='center'>
             <Button
               icon={
                 !isMutating && (

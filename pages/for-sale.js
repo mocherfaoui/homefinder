@@ -6,7 +6,9 @@ export default function ForSalePage() {
   return (
     <Layout pageTitle='Properties For Sale'>
       <Wrapper>
-        <AboveContentTitle h2>Properties For Sale</AboveContentTitle>
+        <AboveContentTitle h2 size='$4xl'>
+          Properties For Sale
+        </AboveContentTitle>
         <SearchAndFilters status='for-sale' />
       </Wrapper>
     </Layout>

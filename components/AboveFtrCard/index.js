@@ -116,7 +116,9 @@ export default function AboveFooterCard() {
                         {!session?.user?.agencyId ? (
                           <>
                             <NextLink href='/agency/new' passHref>
-                              <Link underline>switch </Link>
+                              <Link underline css={{ d: 'inline-flex' }}>
+                                switch{' '}
+                              </Link>
                             </NextLink>{' '}
                             to an agency account
                           </>
@@ -128,7 +130,9 @@ export default function AboveFooterCard() {
                         {!userHasListings && !isLoadingUserListings ? (
                           <>
                             <NextLink href='/listing/new' passHref>
-                              <Link underline>start selling</Link>
+                              <Link underline css={{ d: 'inline-flex' }}>
+                                start selling
+                              </Link>
                             </NextLink>{' '}
                             your properties
                           </>

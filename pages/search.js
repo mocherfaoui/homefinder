@@ -15,7 +15,7 @@ export default function SearchPage() {
   return (
     <Layout pageTitle='Search'>
       <Wrapper>
-        <Text h3 css={{ mb: '$7' }}>
+        <Text h3 size='$3xl' css={{ mb: '$7' }}>
           Searching for{' '}
           {(propertyTypeAndStatus !== 'undefined undefined' &&
             propertyTypeAndStatus) ||
