@@ -88,6 +88,7 @@ export default function ListingPage({
     let lightbox = new PhotoSwipeLightbox({
       gallery: '#test-gallery',
       children: 'a',
+      showHideAnimationType: 'fade',
       pswpModule: () => import('photoswipe'),
       preload: [1, 3],
     });
