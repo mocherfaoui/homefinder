@@ -3,13 +3,13 @@ import { createTheme, globalCss, NextUIProvider } from '@nextui-org/react';
 import { orange } from '@radix-ui/colors';
 import { SessionProvider } from 'next-auth/react';
 
-import 'inter-ui/inter.css';
+import 'public/assets/fonts/style.css';
 
 const theme = createTheme({
   type: 'light',
   theme: {
     fonts: {
-      sans: "-apple-system, Inter, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;",
+      sans: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;",
       mono: "Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono'",
     },
     colors: {
@@ -29,8 +29,6 @@ const globalStyles = globalCss({
     '@md': {
       scrollPaddingTop: '$32',
     },
-  },
-  body: {
     scrollbarColor: ' $colors$gray600 $colors$gray300',
     scrollbarWidth: 'thin',
     scrollbarGutter: 'stable',

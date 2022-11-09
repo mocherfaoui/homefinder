@@ -1,6 +1,8 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { CssBaseline } from '@nextui-org/react';
 
+const fontVariants = ['Regular', 'Medium', 'SemiBold', 'Bold'];
+
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -15,6 +17,16 @@ class MyDocument extends Document {
       <Html lang='en'>
         <Head>
           {CssBaseline.flush()}
+          {fontVariants.map((fontVariant, index) => (
+            <link
+              key={index}
+              rel='preload'
+              href={`/assets/fonts/Inter-${fontVariant}.woff2`}
+              as='font'
+              type='font/woff2'
+              crossOrigin='anonymous'
+            />
+          ))}
           <script
             async
             defer
