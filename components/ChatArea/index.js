@@ -183,7 +183,7 @@ export default function ChatArea({
           wrap='nowrap'
           onSubmit={handleMessageSend}
         >
-          <Grid xs={10} md={11}>
+          <Grid xs={9.5} md={11}>
             <Textarea
               aria-label='type a message'
               minRows={1}
@@ -196,7 +196,7 @@ export default function ChatArea({
               onKeyDown={onEnterPress}
             />
           </Grid>
-          <Grid xs={2} md justify='center'>
+          <Grid xs md justify='center'>
             <Button
               icon={
                 !isMutating && (
