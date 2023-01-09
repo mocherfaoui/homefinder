@@ -19,6 +19,7 @@ import {
   Divider,
   Grid,
   Image,
+  Link,
   Spacer,
   Text,
   User,
@@ -39,6 +40,7 @@ import prisma from '@/lib/prisma';
 
 import {
   ArrowIcon,
+  FlexDiv,
   FlexText,
   HeroIcon,
   ImageGalleryContainer,
@@ -129,7 +131,7 @@ export default function ListingPage({
       </style>
       <Wrapper>
         <Grid.Container css={{ columnGap: '$10', rowGap: '$13' }}>
-          <Grid xs={12} sm={7.5}>
+          <Grid xs={12} sm={8}>
             <Card
               css={{ p: '$sm', '@xsMax': { p: 0, border: 0 } }}
               variant='bordered'
@@ -377,57 +379,27 @@ export default function ListingPage({
               </Card.Body>
             </Card>
           </Grid>
-          <Grid sx={12} sm>
+          <Grid xs={12} sm>
             <Grid.Container
               css={{ p: 0, gap: '$10' }}
               direction='column'
               wrap='nowrap'
             >
-              <Grid xs={12} sm={12}>
+              <Grid xs={12} sm={12} css={{ maxH: '265px' }}>
                 <Card variant='bordered'>
                   <Card.Header>
-                    <Text h3 weight='semibold' id='ratings-card'>
-                      Ratings
-                    </Text>
-                  </Card.Header>
-                  <Divider />
-                  <Card.Body>
-                    {!listingRatings?.length ? (
-                      <Text
-                        size={20}
-                        css={{
-                          d: 'flex',
-                          ai: 'center',
-                          jc: 'center',
-                          h: '100%',
-                          ta: 'center',
-                        }}
+                    <Text h3 weight='semibold' css={{ m: 0 }}>
+                      <NextLink
+                        href={`/agency/${listing?.owner.id}/listings`}
+                        passHref
                       >
-                        This listing has not been rated yet.
-                      </Text>
-                    ) : (
-                      <>
-                        <RatingCard listingRating={listingRatings[0]} />
-                      </>
-                    )}
-                  </Card.Body>
-                  <Divider />
-                  <Card.Footer css={{ jc: 'center' }}>
-                    <NextLink href={`/listing/${listing?.id}/ratings`} passHref>
-                      <Button as='a' auto>
-                        {listingRatings?.length
-                          ? 'View Ratings'
-                          : 'Rate this listing'}
-                      </Button>
-                    </NextLink>
-                  </Card.Footer>
-                </Card>
-              </Grid>
-              <Grid xs={12} sm={12}>
-                <Card variant='bordered'>
-                  <Card.Header>
-                    <Text h3 weight='semibold'>
-                      Agency Profile
+                        <Link underline color='text'>
+                          Agency Profile
+                          <HeroIcon css={{ ml: '$2' }}>
+                            <ChevronRightIcon />
+                          </HeroIcon>
+                        </Link>
+                      </NextLink>
                     </Text>
                   </Card.Header>
                   <Divider />
@@ -444,16 +416,18 @@ export default function ListingPage({
                         listing?.owner.createdAt
                       ).format('MMM DD[,] YYYY')}`}
                     />
-                    <Text css={{ my: '$5' }}>{listing?.owner.description}</Text>
-
+                    <TextTruncate css={{ my: '$5' }}>
+                      {listing?.owner.description}
+                    </TextTruncate>
+                  </Card.Body>
+                  <Divider />
+                  <Card.Footer css={{ jc: 'center' }}>
                     <Grid.Container css={{ p: 0 }}>
-                      <Divider css={{ height: '.5px', mb: '$lg' }} />
                       <Grid xs css={{ py: 0 }}>
                         <Button
                           css={{ w: '100%' }}
                           auto
                           href={`tel:${listing?.owner.phone}`}
-                          ghost
                           as='a'
                           icon={
                             <HeroIcon>
@@ -464,7 +438,7 @@ export default function ListingPage({
                           Call
                         </Button>
                       </Grid>
-                      <Spacer x={.5} />
+                      <Spacer x={0.5} />
                       {(discussionWithAgency.length === 0 ||
                         status === 'unauthenticated') &&
                         !isAgencyAccount &&
@@ -530,18 +504,62 @@ export default function ListingPage({
                         </Grid>
                       )}
                     </Grid.Container>
-                  </Card.Body>
-                  <Divider />
-                  <Card.Footer css={{ jc: 'center' }}>
-                    <NextLink
-                      href={`/agency/${listing?.owner.id}/listings`}
-                      passHref
-                    >
-                      <Button auto as='a'>
-                        View Listings
-                      </Button>
-                    </NextLink>
                   </Card.Footer>
+                </Card>
+              </Grid>
+              <Grid xs={12} sm={12}>
+                <Card variant='bordered'>
+                  <Card.Header>
+                    <Text h3 weight='semibold' id='ratings-card' css={{ m: 0 }}>
+                      <NextLink
+                        href={`/listing/${listing?.id}/ratings`}
+                        passHref
+                      >
+                        <Link underline color='text'>
+                          Ratings
+                          <HeroIcon css={{ ml: '$2' }}>
+                            <ChevronRightIcon />
+                          </HeroIcon>
+                        </Link>
+                      </NextLink>
+                    </Text>
+                  </Card.Header>
+                  <Divider />
+                  <Card.Body>
+                    {!listingRatings?.length ? (
+                      <FlexDiv
+                        css={{
+                          ai: 'center',
+                          jc: 'center',
+                          h: '100%',
+                          ta: 'center',
+                          flexDirection: 'column',
+                          gap: '$10',
+                        }}
+                      >
+                        <Text size={20}>
+                          This listing has not been rated yet.
+                        </Text>
+                        <NextLink
+                          href={`/listing/${listing?.id}/ratings`}
+                          passHref
+                        >
+                          <Button as='a' auto>
+                            Rate it!
+                          </Button>
+                        </NextLink>
+                      </FlexDiv>
+                    ) : (
+                      <FlexDiv css={{ gap: '$8', flexDirection: 'column' }}>
+                        {listingRatings.slice(0, 3).map((listingRating) => (
+                          <RatingCard
+                            key={listingRating.id}
+                            listingRating={listingRating}
+                          />
+                        ))}
+                      </FlexDiv>
+                    )}
+                  </Card.Body>
                 </Card>
               </Grid>
             </Grid.Container>
