@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import {
   Button,
@@ -10,8 +10,9 @@ import {
   Textarea,
 } from '@nextui-org/react';
 
-import { Label, ReactSelect } from '@/components/GlobalComponents';
-import OneImageUpload from '@/components/ImageUpload/OneImageUpload';
+import { OneImageUpload } from '@/components/shared';
+
+import ReactSelect from '../../ReactSelect';
 
 export default function AgencyForm({
   countries,
@@ -145,20 +146,17 @@ export default function AgencyForm({
             fullWidth
           />
         </Grid>
-        <Grid xs={12} sm={3} direction='column'>
-          <Label>Country</Label>
-          <Controller
-            control={control}
+        <Grid xs={12} sm={3}>
+          <ReactSelect
             name='country'
-            render={({ field }) => (
-              <ReactSelect
-                {...field}
-                classNamePrefix='react-select'
-                options={countries}
-                placeholder='Select Country'
-                css={{ w: '100%' }}
-              />
-            )}
+            hookFormMethods={{
+              register,
+              control,
+              options: { required: 'This field is required' },
+            }}
+            label='Country'
+            options={countries}
+            placeholder='Select Country'
           />
         </Grid>
       </Grid.Container>

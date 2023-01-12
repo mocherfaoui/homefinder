@@ -15,9 +15,11 @@ import { useSession } from 'next-auth/react';
 
 import { propertyTypes } from '@/lib/constants';
 
-import { Label, NormalSelect, ReactSelect, Wrapper } from '../GlobalComponents';
-import MultiImageUpload from '../ImageUpload/MultiImageUpload';
-import NoAgencyWarning from '../NoAgencyWarning';
+import { MultiImageUpload } from '@/components/shared';
+
+import { Wrapper } from '../../GlobalComponents';
+import NoAgencyWarning from '../../NoAgencyWarning';
+import ReactSelect from '../../ReactSelect';
 
 export default function ListingForm({
   onSubmit = () => {},
@@ -209,23 +211,23 @@ export default function ListingForm({
                       fullWidth
                     />
                   </Grid>
-                  <Grid xs sm={3.8} direction='column'>
-                    <Label>Property type</Label>
-                    <NormalSelect
+                  <Grid xs sm={3.8}>
+                    <ReactSelect
+                      label='Property Type'
                       name='propertyType'
-                      {...register('propertyType', {
-                        required: 'This field is required',
-                      })}
-                      css={{ w: '100%' }}
-                      aria-label='Property type'
-                    >
-                      <option value=''>Select Property Type</option>
-                      {propertyTypes.map((type, index) => (
-                        <option key={index} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </NormalSelect>
+                      hookFormMethods={{
+                        register,
+                        control,
+                        options: {
+                          required: 'This field is required',
+                        },
+                      }}
+                      options={propertyTypes.map((type) => ({
+                        label: type,
+                        value: type,
+                      }))}
+                      placeholder='Select Property Type'
+                    />
                   </Grid>
                 </Grid.Container>
                 <Grid.Container css={{ gap: '$8' }}>
@@ -268,23 +270,17 @@ export default function ListingForm({
                       fullWidth
                     />
                   </Grid>
-                  <Grid xs={12} sm={3.5} direction='column'>
-                    <Label>Country</Label>
-                    <Controller
-                      control={control}
+                  <Grid xs={12} sm={3.5}>
+                    <ReactSelect
                       name='country'
-                      {...register('country', {
-                        required: 'This field is required',
-                      })}
-                      render={({ field }) => (
-                        <ReactSelect
-                          {...field}
-                          classNamePrefix='react-select'
-                          options={countries}
-                          placeholder='Select Country'
-                          css={{ w: '100%' }}
-                        />
-                      )}
+                      hookFormMethods={{
+                        register,
+                        control,
+                        options: { required: 'This field is required' },
+                      }}
+                      label='Country'
+                      options={countries}
+                      placeholder='Select Country'
                     />
                   </Grid>
                 </Grid.Container>

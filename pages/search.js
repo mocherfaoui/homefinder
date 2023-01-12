@@ -4,7 +4,7 @@ import 'swiper/css';
 
 import { Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
-import SearchAndFilters from '@/components/SearchAndFilters';
+import { SearchAndFilters } from '@/components/shared';
 
 export default function SearchPage() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function SearchPage() {
   return (
     <Layout pageTitle='Search'>
       <Wrapper>
-        <Text h3 size='$3xl' css={{ mb: '$7' }}>
+        <Text h3 size='$3xl' css={{ mb: '$9' }}>
           Searching for{' '}
           {(propertyTypeAndStatus !== 'undefined undefined' &&
             propertyTypeAndStatus) ||

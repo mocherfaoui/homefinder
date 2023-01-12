@@ -1,4 +1,3 @@
-import Select from 'react-select';
 import { Grid, keyframes, styled, Text } from '@nextui-org/react';
 
 export const MainWrapper = styled('div', {
@@ -18,24 +17,6 @@ export const Wrapper = styled('div', {
   maxWidth: '82rem',
   w: '100%',
   p: '0 $8',
-});
-export const ReactSelect = styled(Select, {
-  '&  .react-select__control': {
-    border: 0,
-    py: '$1',
-    pl: '$5',
-    outline: 0,
-    boxShadow: 'none',
-    color: '$text',
-    background: '$accents0',
-    br: '$lg',
-  },
-  '& .react-select__value-container': { pl: 0, py: 0 },
-  '& .react-select__indicator-separator': { mt: '8px' },
-  '& .react-select__menu': {
-    zIndex: '1000',
-    br: '$sm',
-  },
 });
 export const Label = styled('label', {
   display: 'block',
@@ -158,10 +139,11 @@ export const SliderContainer = styled('div', {
   },
 });
 
-export const FilterContainer = styled('div', {
+export const FilterContainer = styled(Grid, {
   d: 'flex',
   fd: 'row',
   gap: '$3',
+  alignItems: 'center',
 });
 export const FilterSliderContainer = styled('div', {
   w: '100%',
@@ -341,7 +323,7 @@ export const FiltersArrow = styled(Grid, {
           height: '60%',
           width: '32px',
           background:
-            'linear-gradient(to right,$white,$gray50 10%,rgba(249,249,249,0) 90%)',
+            'linear-gradient(to right,#fff 10%,rgba(249,249,249,0) 90%)',
         },
       },
       right: {
@@ -352,7 +334,7 @@ export const FiltersArrow = styled(Grid, {
           height: '60%',
           width: '32px',
           background:
-            'linear-gradient(to left,$white,$gray50 10%,rgba(249,249,249,0) 90%)',
+            'linear-gradient(to left,#fff 10%,rgba(249,249,249,0) 90%)',
         },
       },
     },

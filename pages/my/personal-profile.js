@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Button, Grid, Input } from '@nextui-org/react';
 import useSWR from 'swr';
 
 import { getCountries } from '@/lib/db';
 
-import { Label, ReactSelect } from '@/components/GlobalComponents';
 import OneImageUpload from '@/components/ImageUpload/OneImageUpload';
 import MyPagesLayout from '@/components/Layout/MyLayout';
+import ReactSelect from '@/components/ReactSelect';
 
 import { fetcher } from '@/utils/fetcher';
 
@@ -17,7 +17,8 @@ export default function MyPersonaProfilePage({ countries }) {
     refreshInterval: 0,
   });
   const [logoUrl, setLogoUrl] = useState(initialValues?.image ?? '');
-  const { register, handleSubmit, control } = useForm({});
+  const { register, handleSubmit, control } = useForm();
+
   const handleOnSubmit = async (data) => {
     const newData = { ...data, image: logoUrl };
     let toastId;
@@ -50,7 +51,7 @@ export default function MyPersonaProfilePage({ countries }) {
   return (
     <MyPagesLayout pageTitle='My Personal Profile'>
       <Grid xs={12}>
-        {initialValues && (
+        {!!initialValues && (
           <Grid.Container
             as='form'
             onSubmit={handleSubmit(handleOnSubmit)}
@@ -135,21 +136,18 @@ export default function MyPersonaProfilePage({ countries }) {
                 {...register('zipcode', { required: true })}
               />
             </Grid>
-            <Grid xs={8} sm={4} direction='column'>
-              <Label>Country</Label>
-              <Controller
-                control={control}
+            <Grid xs={8} sm={4}>
+              <ReactSelect
                 name='country'
-                defaultValue={initialValues?.country}
-                render={({ field }) => (
-                  <ReactSelect
-                    {...field}
-                    classNamePrefix='react-select'
-                    options={countries}
-                    placeholder='Select Country'
-                    css={{ w: '100%' }}
-                  />
-                )}
+                hookFormMethods={{
+                  register,
+                  control,
+                  options: { required: 'This field is required' },
+                }}
+                label='Country'
+                options={countries}
+                placeholder='Select Country'
+                value={initialValues?.country}
               />
             </Grid>
             <Grid xs={12}>
