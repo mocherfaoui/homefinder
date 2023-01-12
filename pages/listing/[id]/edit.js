@@ -51,6 +51,11 @@ export const getServerSideProps = async ({ params, req, res }) => {
     },
   });
 
+  listing['propertyType'] = {
+    value: listing.propertyType,
+    label: listing.propertyType,
+  };
+
   const { countries } = await getCountries();
 
   const isListingOwner = listing.ownerId === session?.user?.agencyId;
