@@ -19,13 +19,13 @@ import useSWR from 'swr';
 import { getListingRatings, getListingRatingsAvg } from '@/lib/db';
 import prisma from '@/lib/prisma';
 
+import Layout from '@/components/Layout';
 import {
   HeroIcon,
+  RatingCard,
   RatingContainer,
   Wrapper,
-} from '@/components/GlobalComponents';
-import Layout from '@/components/Layout';
-import RatingCard from '@/components/RatingCard';
+} from '@/components/shared';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { fetcher } from '@/utils/fetcher';

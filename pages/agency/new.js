@@ -3,9 +3,9 @@ import { useSession } from 'next-auth/react';
 
 import { getCountries } from '@/lib/db';
 
-import AgencyForm from '@/components/AgencyForm';
-import { Wrapper } from '@/components/GlobalComponents';
+import { AgencyForm } from '@/components/forms';
 import Layout from '@/components/Layout';
+import { Wrapper } from '@/components/shared';
 
 export default function NewAgency({ countries }) {
   const { data: session, status } = useSession();

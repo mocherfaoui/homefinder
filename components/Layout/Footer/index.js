@@ -3,7 +3,7 @@ import { Divider, Grid, Link, Text } from '@nextui-org/react';
 
 import { navLinks } from '@/lib/constants';
 
-import { Wrapper } from '@/components/GlobalComponents';
+import { Wrapper } from '@/components/shared';
 
 export default function Footer() {
   return (

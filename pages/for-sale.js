@@ -1,6 +1,9 @@
-import { AboveContentTitle, Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
-import SearchAndFilters from '@/components/SearchAndFilters';
+import {
+  AboveContentTitle,
+  SearchAndFilters,
+  Wrapper,
+} from '@/components/shared';
 
 export default function ForSalePage() {
   return (

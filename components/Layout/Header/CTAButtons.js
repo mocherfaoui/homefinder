@@ -43,7 +43,7 @@ export default function CTAButtons() {
         <>
           <Navbar.Item hideIn='xs'>
             <NextLink href='/listing/new' passHref>
-              <Button auto as='a' onClick={(e) => e?.preventDefault()}>
+              <Button auto as='a'>
                 List
               </Button>
             </NextLink>

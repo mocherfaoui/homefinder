@@ -13,7 +13,7 @@ import { signOut } from 'next-auth/react';
 import { popOverMenu } from '@/lib/constants';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
-import { HeroIcon } from '@/components/GlobalComponents';
+import { HeroIcon } from '@/components/shared';
 
 import { DropDownLink } from './HeaderStyles';
 

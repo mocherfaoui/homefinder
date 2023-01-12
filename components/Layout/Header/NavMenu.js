@@ -6,7 +6,7 @@ import { signIn, useSession } from 'next-auth/react';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { HeroIcon } from '@/components/GlobalComponents';
+import { HeroIcon } from '@/components/shared';
 
 import { CTAButtons } from './HeaderStyles';
 import NavItems from './NavItems';

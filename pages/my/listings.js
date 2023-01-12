@@ -3,10 +3,13 @@ import { Grid } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 import useSWR from 'swr';
 
-import { FlexText, HeroIcon } from '@/components/GlobalComponents';
 import MyPagesLayout from '@/components/Layout/MyLayout';
-import ListingCard from '@/components/ListingCard';
-import NoAgencyWarning from '@/components/NoAgencyWarning';
+import {
+  FlexText,
+  HeroIcon,
+  ListingCard,
+  NoAgencyWarning,
+} from '@/components/shared';
 
 import { fetcher } from '@/utils/fetcher';
 

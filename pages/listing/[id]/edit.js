@@ -3,8 +3,8 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { getCountries } from '@/lib/db';
 import prisma from '@/lib/prisma';
 
+import { ListingForm } from '@/components/forms';
 import Layout from '@/components/Layout';
-import ListingForm from '@/components/ListingForm';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 

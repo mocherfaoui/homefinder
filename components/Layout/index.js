@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Footer from './Footer';
 import Header from './Header';
-import { MainWrapper } from '../GlobalComponents';
+import { MainWrapper } from '../shared/shared-components';
 
 export default function Layout({ children, pageTitle }) {
   const router = useRouter();

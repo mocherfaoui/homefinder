@@ -38,20 +38,20 @@ import 'photoswipe/style.css';
 import { getListingRatingsAvg } from '@/lib/db';
 import prisma from '@/lib/prisma';
 
+import Layout from '@/components/Layout';
 import {
   ArrowIcon,
   FlexDiv,
   FlexText,
   HeroIcon,
   ImageGalleryContainer,
+  ListingsCarousel,
   PropertyFeatures,
+  RatingCard,
   TextTruncate,
+  TopButtons,
   Wrapper,
-} from '@/components/GlobalComponents';
-import Layout from '@/components/Layout';
-import ListingsCarousel from '@/components/ListingsCarousel';
-import RatingCard from '@/components/RatingCard';
-import TopButtons from '@/components/TopButtons';
+} from '@/components/shared';
 
 import dayjs from '@/utils/dayjs';
 import { fetcher } from '@/utils/fetcher';
@@ -59,7 +59,9 @@ import timeAgo from '@/utils/timeAgo';
 
 import { authOptions } from '../api/auth/[...nextauth]';
 
-const SendMessageModal = dynamic(() => import('@/components/SendMessageModal'));
+const SendMessageModal = dynamic(() =>
+  import('@/components/shared').then((mod) => mod.SendMessageModal)
+);
 
 export default function ListingPage({
   listing,

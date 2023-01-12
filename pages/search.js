@@ -2,9 +2,8 @@ import { useRouter } from 'next/router';
 import { Text } from '@nextui-org/react';
 import 'swiper/css';
 
-import { Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
-import { SearchAndFilters } from '@/components/shared';
+import { SearchAndFilters, Wrapper } from '@/components/shared';
 
 export default function SearchPage() {
   const router = useRouter();

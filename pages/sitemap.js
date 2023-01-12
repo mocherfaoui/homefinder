@@ -3,8 +3,8 @@ import { Divider, Grid, Link, Text } from '@nextui-org/react';
 
 import { navLinks, sideBarMenu } from '@/lib/constants';
 
-import { ListContainer, Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
+import { ListContainer, Wrapper } from '@/components/shared';
 
 export default function SiteMapPage() {
   return (

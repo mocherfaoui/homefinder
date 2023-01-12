@@ -15,7 +15,6 @@ export default function Header() {
   return (
     <Navbar
       variant='sticky'
-      shouldHideOnScroll
       css={{
         '& .nextui-navbar-container': {
           maxWidth: '82rem',

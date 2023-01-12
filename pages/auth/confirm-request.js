@@ -4,8 +4,8 @@ import { CheckCircleIcon } from '@heroicons/react/outline';
 import { Grid, Link, Loading, Text } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 
-import { FlexText, HeroIcon, Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
+import { FlexText, HeroIcon, Wrapper } from '@/components/shared';
 
 const ConfirmRequest = () => {
   const { data: session, status } = useSession();

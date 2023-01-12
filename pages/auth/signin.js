@@ -11,8 +11,8 @@ import { Button, Grid, Input, Modal, Text } from '@nextui-org/react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { getProviders, getSession, signIn } from 'next-auth/react';
 
-import { FlexText, HeroIcon, Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
+import { FlexText, HeroIcon, Wrapper } from '@/components/shared';
 
 import { authOptions } from '../api/auth/[...nextauth]';
 

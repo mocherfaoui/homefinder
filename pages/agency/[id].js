@@ -13,12 +13,8 @@ import { useSession } from 'next-auth/react';
 
 import prisma from '@/lib/prisma';
 
-import {
-  ContactDetails,
-  HeroIcon,
-  Wrapper,
-} from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
+import { ContactDetails, HeroIcon, Wrapper } from '@/components/shared';
 
 export default function AgencyPage({ agency }) {
   const { data: session } = useSession();

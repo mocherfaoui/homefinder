@@ -4,7 +4,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { getCountries } from '@/lib/db';
 import prisma from '@/lib/prisma';
 
-import AgencyForm from '@/components/AgencyForm';
+import { AgencyForm } from '@/components/forms';
 import MyPagesLayout from '@/components/Layout/MyLayout';
 
 import { authOptions } from '../api/auth/[...nextauth]';

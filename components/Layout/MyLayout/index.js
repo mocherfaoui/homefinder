@@ -1,8 +1,8 @@
 import { Collapse, Divider, Grid, Text, User } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 
-import { VerticalLine, Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
+import { VerticalLine, Wrapper } from '@/components/shared';
 
 import SidebarMenu from './SidebarMenu';
 

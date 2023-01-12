@@ -1,7 +1,7 @@
 import { getCountries } from '@/lib/db';
 
+import { ListingForm } from '@/components/forms';
 import Layout from '@/components/Layout';
-import ListingForm from '@/components/ListingForm';
 
 export default function ListNewHome({ countries }) {
   const onSubmit = (newListing) => {

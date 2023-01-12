@@ -4,8 +4,7 @@ import useSWR from 'swr';
 import useIsClient from '@/hooks/useIsClient';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
-import DiscussionsPageL from '@/components/DiscussionsPage/DiscussionPageL';
-import DiscussionsPageS from '@/components/DiscussionsPage/DiscussionPageS';
+import { DiscussionsPageL, DiscussionsPageS } from '@/components/pages';
 
 import dayjs from '@/utils/dayjs';
 import { fetcher } from '@/utils/fetcher';

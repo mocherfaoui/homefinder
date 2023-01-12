@@ -6,9 +6,8 @@ import useSWR from 'swr';
 
 import { getCountries } from '@/lib/db';
 
-import OneImageUpload from '@/components/ImageUpload/OneImageUpload';
 import MyPagesLayout from '@/components/Layout/MyLayout';
-import ReactSelect from '@/components/ReactSelect';
+import { OneImageUpload, ReactSelect } from '@/components/shared';
 
 import { fetcher } from '@/utils/fetcher';
 

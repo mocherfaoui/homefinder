@@ -11,7 +11,7 @@ import { useSession } from 'next-auth/react';
 
 import { sideBarMenu } from '@/lib/constants';
 
-import { FlexText, HeroIcon } from '@/components/GlobalComponents';
+import { FlexText, HeroIcon } from '@/components/shared';
 
 import { MenuContainer } from './MyLayoutStyles';
 

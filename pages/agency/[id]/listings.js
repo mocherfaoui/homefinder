@@ -2,9 +2,8 @@ import { Text } from '@nextui-org/react';
 
 import prisma from '@/lib/prisma';
 
-import { Wrapper } from '@/components/GlobalComponents';
 import Layout from '@/components/Layout';
-import SearchAndFilters from '@/components/SearchAndFilters';
+import { SearchAndFilters, Wrapper } from '@/components/shared';
 
 export default function AgencyListings({ agencyData }) {
   return (

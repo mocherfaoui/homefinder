@@ -3,13 +3,14 @@ import { Divider, Grid, Text } from '@nextui-org/react';
 import prisma from '@/lib/prisma';
 import useIsClient from '@/hooks/useIsClient';
 
-import AboveFooterCard from '@/components/AboveFtrCard';
-import Features from '@/components/Features';
-import { Wrapper } from '@/components/GlobalComponents';
-import HeroArea from '@/components/HeroArea';
 import Layout from '@/components/Layout';
-import ListingsCarousel from '@/components/ListingsCarousel';
-import PopularListings from '@/components/PopularListings';
+import {
+  AboveFooterCard,
+  Features,
+  HeroArea,
+  PopularListings,
+} from '@/components/pages';
+import { ListingsCarousel, Wrapper } from '@/components/shared';
 
 export default function Home({ recentListings }) {
   const isClient = useIsClient();

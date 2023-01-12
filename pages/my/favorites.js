@@ -2,7 +2,7 @@ import { Grid, Text } from '@nextui-org/react';
 import useSWR from 'swr';
 
 import MyPagesLayout from '@/components/Layout/MyLayout';
-import ListingCard from '@/components/ListingCard';
+import { ListingCard } from '@/components/shared';
 
 import { fetcher } from '@/utils/fetcher';
 
