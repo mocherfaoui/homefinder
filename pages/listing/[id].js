@@ -1,16 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BiBath, BiBed, BiExpand } from 'react-icons/bi';
 import { MdOutlineLocationOn } from 'react-icons/md';
-import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import {
-  ChatIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ClockIcon,
   EyeIcon,
   HomeIcon,
-  PhoneIcon,
 } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import {
@@ -20,12 +17,8 @@ import {
   Grid,
   Image,
   Link,
-  Spacer,
   Text,
-  User,
 } from '@nextui-org/react';
-import { unstable_getServerSession } from 'next-auth/next';
-import { useSession } from 'next-auth/react';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -39,13 +32,14 @@ import { getListingRatingsAvg } from '@/lib/db';
 import prisma from '@/lib/prisma';
 
 import Layout from '@/components/Layout';
+import AboutAgency from '@/components/pages/listing/about-agency';
+import SuggestedListings from '@/components/pages/listing/suggested-listings';
 import {
   ArrowIcon,
   FlexDiv,
   FlexText,
   HeroIcon,
   ImageGalleryContainer,
-  ListingsCarousel,
   PropertyFeatures,
   RatingCard,
   TextTruncate,
@@ -57,21 +51,11 @@ import dayjs from '@/utils/dayjs';
 import { fetcher } from '@/utils/fetcher';
 import timeAgo from '@/utils/timeAgo';
 
-import { authOptions } from '../api/auth/[...nextauth]';
-
-const SendMessageModal = dynamic(() =>
-  import('@/components/shared').then((mod) => mod.SendMessageModal)
-);
-
 export default function ListingPage({
   listing,
   listingRatingsAvg,
   listingRatings,
-  recommendedListings,
-  moreFromAgency,
-  discussionWithAgency,
 }) {
-  const { data: session, status } = useSession();
   const { data: listingViews, isLoading } = useSWR(
     `/api/listing/${listing.id}/view`,
     fetcher,
@@ -79,16 +63,14 @@ export default function ListingPage({
       fallbackData: listing?.views?.totalViews,
     }
   );
-  const [sendMessageModal, setSendMessageModal] = useState(false);
-  const [messageSent, setMessageSent] = useState(false);
+
   const listingUrl = typeof document !== 'undefined' && document.location.href;
   const shareDetails = { url: listingUrl, title: listing?.title };
   const scrollToRatings = () => {
     const ratingsCard = document.getElementById('ratings-card');
     ratingsCard.scrollIntoView({ behavior: 'smooth' });
   };
-  const agencyOwnerId = listing.owner.ownerId;
-  const isAgencyAccount = session?.user?.agencyId;
+
   useEffect(() => {
     let lightbox = new PhotoSwipeLightbox({
       gallery: '#test-gallery',
@@ -116,9 +98,6 @@ export default function ListingPage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const closeModal = () => {
-    setSendMessageModal(false);
-  };
   return (
     <Layout pageTitle={listing?.title}>
       <style>
@@ -387,128 +366,7 @@ export default function ListingPage({
               direction='column'
               wrap='nowrap'
             >
-              <Grid xs={12} sm={12} css={{ maxH: '265px' }}>
-                <Card variant='bordered'>
-                  <Card.Header>
-                    <Text h3 weight='semibold' css={{ m: 0 }}>
-                      <NextLink
-                        href={`/agency/${listing?.owner.id}/listings`}
-                        passHref
-                      >
-                        <Link underline color='text'>
-                          Agency Profile
-                          <HeroIcon css={{ ml: '$2' }}>
-                            <ChevronRightIcon />
-                          </HeroIcon>
-                        </Link>
-                      </NextLink>
-                    </Text>
-                  </Card.Header>
-                  <Divider />
-                  <Card.Body css={{ justifyContent: 'space-between' }}>
-                    <User
-                      /* title={dayjs(listing?.owner.createdAt).format(
-                    'ddd[,] MMMM Do[,] YYYY hh[:]mm A z'
-                  )} */
-                      name={listing?.owner.name}
-                      src={listing?.owner.logo}
-                      size='lg'
-                      css={{ pl: 0 }}
-                      description={`Member since ${dayjs(
-                        listing?.owner.createdAt
-                      ).format('MMM DD[,] YYYY')}`}
-                    />
-                    <TextTruncate css={{ my: '$5' }}>
-                      {listing?.owner.description}
-                    </TextTruncate>
-                  </Card.Body>
-                  <Divider />
-                  <Card.Footer css={{ jc: 'center' }}>
-                    <Grid.Container css={{ p: 0 }}>
-                      <Grid xs css={{ py: 0 }}>
-                        <Button
-                          css={{ w: '100%' }}
-                          auto
-                          href={`tel:${listing?.owner.phone}`}
-                          as='a'
-                          icon={
-                            <HeroIcon>
-                              <PhoneIcon />
-                            </HeroIcon>
-                          }
-                        >
-                          Call
-                        </Button>
-                      </Grid>
-                      <Spacer x={0.5} />
-                      {(discussionWithAgency.length === 0 ||
-                        status === 'unauthenticated') &&
-                        !isAgencyAccount &&
-                        !messageSent && (
-                          <Grid xs={6} css={{ py: 0 }}>
-                            <Button
-                              ghost
-                              css={{ w: '100%' }}
-                              icon={
-                                <HeroIcon>
-                                  <ChatIcon />
-                                </HeroIcon>
-                              }
-                              auto
-                              onClick={() => setSendMessageModal(true)}
-                            >
-                              Chat
-                            </Button>
-                            <SendMessageModal
-                              visible={sendMessageModal}
-                              onClose={closeModal}
-                              agencyOwnerId={agencyOwnerId}
-                              session={session}
-                              listing={listing}
-                              setMessageSent={setMessageSent}
-                            />
-                          </Grid>
-                        )}
-                      {(discussionWithAgency.length > 0 || messageSent) && (
-                        <Grid xs={6} css={{ py: 0 }}>
-                          <NextLink href='/my/discussions' passHref>
-                            <Button
-                              as='a'
-                              ghost
-                              css={{ w: '100%' }}
-                              icon={
-                                <HeroIcon>
-                                  <ChatIcon />
-                                </HeroIcon>
-                              }
-                              auto
-                            >
-                              Chat
-                            </Button>
-                          </NextLink>
-                        </Grid>
-                      )}
-                      {isAgencyAccount && (
-                        <Grid xs={6} css={{ py: 0 }}>
-                          <Button
-                            ghost
-                            css={{ w: '100%' }}
-                            icon={
-                              <HeroIcon>
-                                <ChatIcon />
-                              </HeroIcon>
-                            }
-                            auto
-                            disabled
-                          >
-                            Chat
-                          </Button>
-                        </Grid>
-                      )}
-                    </Grid.Container>
-                  </Card.Footer>
-                </Card>
-              </Grid>
+              <AboutAgency listing={listing} />
               <Grid xs={12} sm={12}>
                 <Card variant='bordered'>
                   <Card.Header>
@@ -567,53 +425,31 @@ export default function ListingPage({
             </Grid.Container>
           </Grid>
         </Grid.Container>
-        {moreFromAgency && (
-          <>
-            <Divider css={{ my: '$15', h: 0 }} />
-            <Grid.Container>
-              <Grid xs={12}>
-                <Text h3 transform='capitalize'>
-                  More From {listing?.owner?.name}
-                </Text>
-              </Grid>
-              <Grid xs={12}>
-                <Divider css={{ w: '70px', my: '$3', h: '2px' }} />
-              </Grid>
-              <Grid xs={12}>
-                <ListingsCarousel
-                  listings={moreFromAgency}
-                  uniqueId='morefrom'
-                />
-              </Grid>
-            </Grid.Container>
-          </>
-        )}
-        {recommendedListings && (
-          <>
-            <Divider css={{ my: '$14', h: 0 }} />
-            <Grid.Container>
-              <Grid xs={12}>
-                <Text h3>Recommended Listings</Text>
-              </Grid>
-              <Grid xs={12}>
-                <Divider css={{ w: '70px', my: '$3', h: '2px' }} />
-              </Grid>
-              <Grid xs={12}>
-                <ListingsCarousel
-                  listings={recommendedListings}
-                  uniqueId='reclist'
-                />
-              </Grid>
-            </Grid.Container>
-          </>
-        )}
+        <SuggestedListings listing={listing} />
       </Wrapper>
     </Layout>
   );
 }
 
-export const getServerSideProps = async ({ params, req, res }) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
+export const getStaticPaths = async () => {
+  const listings = await prisma.listing.findMany({
+    select: {
+      id: true,
+    },
+    take: 50,
+  });
+
+  return {
+    paths: listings.map((listing) => ({
+      params: {
+        id: listing.id,
+      },
+    })),
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
   const listing = await prisma.listing.findUnique({
     where: {
       id: params.id,
@@ -644,78 +480,6 @@ export const getServerSideProps = async ({ params, req, res }) => {
     };
   }
 
-  const moreFromAgency = await prisma.listing.findMany({
-    where: {
-      ownerId: listing?.owner?.id,
-      isPublished: true,
-      id: {
-        not: listing.id,
-      },
-    },
-    include: {
-      country: {
-        select: {
-          label: true,
-        },
-      },
-    },
-    take: 8,
-  });
-  const recommendedListings = await prisma.listing.findMany({
-    where: {
-      OR: [
-        {
-          country: {
-            is: {
-              label: listing.country.label,
-            },
-          },
-        },
-        {
-          propertyType: listing.propertyType,
-        },
-        {
-          status: listing.status,
-        },
-      ],
-      isPublished: true,
-      id: {
-        not: listing.id,
-      },
-      NOT: [
-        {
-          ownerId: session?.user?.agencyId || '',
-        },
-        {
-          ownerId: listing?.owner?.id,
-        },
-      ],
-    },
-    orderBy: {
-      views: {
-        totalViews: 'desc',
-      },
-    },
-    include: {
-      country: {
-        select: {
-          label: true,
-        },
-      },
-    },
-    take: 6,
-  });
-  const discussionWithAgency = await prisma.discussion.findMany({
-    where: {
-      participants: {
-        every: {
-          id: {
-            in: [listing?.owner?.ownerId, session?.user?.id ?? ''],
-          },
-        },
-      },
-    },
-  });
   const listingRatings = await prisma.rating.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -737,13 +501,10 @@ export const getServerSideProps = async ({ params, req, res }) => {
 
   return {
     props: {
-      session,
-      moreFromAgency: JSON.parse(JSON.stringify(moreFromAgency)),
-      recommendedListings: JSON.parse(JSON.stringify(recommendedListings)),
       listingRatingsAvg,
       listingRatings: JSON.parse(JSON.stringify(listingRatings)),
       listing: JSON.parse(JSON.stringify(listing)),
-      discussionWithAgency: JSON.parse(JSON.stringify(discussionWithAgency)),
     },
+    revalidate: 10,
   };
 };
