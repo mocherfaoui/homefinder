@@ -57,6 +57,7 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     EmailProvider({
       maxAge: 10 * 60, // Magic links are valid for 10 min only
