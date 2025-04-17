@@ -176,8 +176,8 @@ export const ArrowIcon = styled(FlexText, {
     bg: '$gray50',
     borderColor: '$gray500',
   },
-  '& .swiper-button-disabled': {
-    opacity: 0.5,
+  '&.swiper-button-disabled': {
+    display: 'none'
   },
   variants: {
     arrow: {

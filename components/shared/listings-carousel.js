@@ -18,15 +18,23 @@ import {
 export function ListingsCarousel({ listings, uniqueId = 'sw' }) {
   return (
     <Grid.Container css={{ position: 'relative' }}>
-      <ArrowIcon as='div' arrow='left'>
-        <FlexText span className={`${uniqueId}-swiper-button-prev`}>
+      <ArrowIcon
+        as='div'
+        arrow='left'
+        className={`${uniqueId}-swiper-button-prev`}
+      >
+        <FlexText span>
           <HeroIcon>
             <ChevronLeftIcon />
           </HeroIcon>
         </FlexText>
       </ArrowIcon>
-      <ArrowIcon as='div' arrow='right'>
-        <FlexText span className={`${uniqueId}-swiper-button-next`}>
+      <ArrowIcon
+        as='div'
+        arrow='right'
+        className={`${uniqueId}-swiper-button-next`}
+      >
+        <FlexText span>
           <HeroIcon>
             <ChevronRightIcon />
           </HeroIcon>

@@ -122,15 +122,23 @@ export default function ListingPage({
                   {/* don't show navigation buttons if images count is lower than images per view */}
                   {listing?.images?.length > 2 && (
                     <>
-                      <ArrowIcon as='div' arrow='left'>
-                        <FlexText span className='image-swiper-button-prev'>
+                      <ArrowIcon
+                        as='div'
+                        arrow='left'
+                        className='image-swiper-button-prev'
+                      >
+                        <FlexText span>
                           <HeroIcon>
                             <ChevronLeftIcon />
                           </HeroIcon>
                         </FlexText>
                       </ArrowIcon>
-                      <ArrowIcon as='div' arrow='right'>
-                        <FlexText span className='image-swiper-button-next'>
+                      <ArrowIcon
+                        as='div'
+                        arrow='right'
+                        className='image-swiper-button-next'
+                      >
+                        <FlexText span>
                           <HeroIcon>
                             <ChevronRightIcon />
                           </HeroIcon>
