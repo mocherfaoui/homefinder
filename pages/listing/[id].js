@@ -72,13 +72,38 @@ export default function ListingPage({
   };
 
   useEffect(() => {
+    const getImageDimensions = async (imageUrl) => {
+      return new Promise((resolve) => {
+        const img = document.createElement('img');
+        img.onload = () => {
+          resolve({
+            width: img.naturalWidth,
+            height: img.naturalHeight,
+          });
+        };
+        img.src = imageUrl;
+      });
+    };
+
+    const updateImageDimensions = async () => {
+      const images = document.querySelectorAll('#test-gallery a');
+      for (const image of images) {
+        const dimensions = await getImageDimensions(image.href);
+        image.setAttribute('data-pswp-width', dimensions.width);
+        image.setAttribute('data-pswp-height', dimensions.height);
+      }
+    };
+
+    updateImageDimensions();
+
     let lightbox = new PhotoSwipeLightbox({
       gallery: '#test-gallery',
       children: 'a',
-      showHideAnimationType: 'fade',
+      showHideAnimationType: 'zoom',
       pswpModule: () => import('photoswipe'),
       preload: [1, 3],
     });
+
     lightbox.init();
 
     return () => {
@@ -86,6 +111,7 @@ export default function ListingPage({
       lightbox = null;
     };
   }, []);
+
   useEffect(() => {
     async function collectView() {
       await fetch(`/api/listing/${listing?.id}/view`, {
@@ -186,10 +212,9 @@ export default function ListingPage({
                           <SwiperSlide key={index}>
                             <a
                               href={image}
-                              data-pswp-width={960}
-                              data-pswp-height={640}
                               target='_blank'
                               rel='noreferrer'
+                              data-cropped='true'
                             >
                               <Image
                                 src={image}
