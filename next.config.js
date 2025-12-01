@@ -8,6 +8,10 @@ const nextConfig = {
       contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     },
   },
+  outputFileTracingIncludes: {
+    "/api/**/*": ["./node_modules/.prisma/client/**/*"],
+    "/**/*": ["./node_modules/.prisma/client/**/*"],
+  },
   async headers() {
     return [
       {
