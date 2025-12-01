@@ -1,7 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  binaryTargets = ["native", "rhel-openssl-3.0.x"]
-  output = "./generated"
+  output   = "./generated"
 }
 
 datasource db {
@@ -168,7 +167,6 @@ model Message {
   updatedAt    DateTime   @updatedAt
   author       User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
   Discussion   Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
-
 }
 
 enum Continent {
@@ -177,8 +175,8 @@ enum Continent {
   Asia
   Europe
   Oceania
-  North_America  @map("North America")
-  South_America  @map("South America")
+  North_America @map("North America")
+  South_America @map("South America")
 
   @@map("continents")
 }
