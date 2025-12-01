@@ -10,11 +10,13 @@ import path from 'path';
 import prisma from '@/lib/prisma';
 
 const transporter = nodemailer.createTransport({
-  service: 'Proton',
+  host: process.env.EMAIL_SERVER_HOST,
+  port: process.env.EMAIL_SERVER_PORT,
   auth: {
     user: process.env.EMAIL_SERVER_USER,
     pass: process.env.EMAIL_SERVER_PASSWORD,
   },
+  requireTLS: true,
 });
 
 const emailsDir = path.resolve(process.cwd(), 'emails');
