@@ -45,6 +45,8 @@ import { fetcher } from '@/utils/fetcher';
 import timeAgo from '@/utils/timeAgo';
 
 const GALLERY_SLIDE_HEIGHT_PX = 300;
+const getLightboxImageUrl = (imageUrl) =>
+  `/_next/image?url=${encodeURIComponent(imageUrl)}&w=2048&q=85`;
 
 export default function ListingPage({
   listing,
@@ -96,7 +98,6 @@ export default function ListingPage({
       children: 'a',
       showHideAnimationType: 'zoom',
       pswpModule: () => import('photoswipe'),
-      preload: [1, 3],
     });
 
     lightbox.init();
@@ -206,7 +207,7 @@ export default function ListingPage({
                         {listing?.images.map((image, index) => (
                           <SwiperSlide key={index}>
                             <a
-                              href={image}
+                              href={getLightboxImageUrl(image)}
                               target='_blank'
                               rel='noreferrer'
                               data-cropped='true'
@@ -226,6 +227,7 @@ export default function ListingPage({
                                 objectFit='cover'
                                 sizes='(max-width: 767px) 100vw, 50vw'
                                 priority={index < 2}
+                                fetchpriority={index < 2 ? 'high' : 'auto'}
                                 loading={index < 2 ? 'eager' : 'lazy'}
                               />
                             </a>
