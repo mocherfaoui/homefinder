@@ -51,7 +51,7 @@ export default function Footer() {
               >
                 {navLinks.map(({ text, href }, index) => (
                   <Grid key={index} xs sm>
-                    <NextLink href={href} passHref>
+                    <NextLink href={href} passHref legacyBehavior>
                       <Link
                         color='text'
                         underline
@@ -63,7 +63,7 @@ export default function Footer() {
                   </Grid>
                 ))}
                 <Grid xs={3.6}>
-                  <NextLink href='/sitemap' passHref>
+                  <NextLink href='/sitemap' passHref legacyBehavior>
                     <Link
                       color='text'
                       underline

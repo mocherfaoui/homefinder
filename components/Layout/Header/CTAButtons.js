@@ -42,7 +42,7 @@ export default function CTAButtons() {
       {status === 'authenticated' && (
         <>
           <Navbar.Item hideIn='xs'>
-            <NextLink href='/listing/new' passHref>
+            <NextLink href='/listing/new' passHref legacyBehavior>
               <Button auto as='a'>
                 List
               </Button>

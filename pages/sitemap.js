@@ -22,19 +22,19 @@ export default function SiteMapPage() {
               <Text h4>Main / Navigation</Text>
               <ListContainer>
                 <li>
-                  <NextLink href='/' passHref>
+                  <NextLink href='/' passHref legacyBehavior>
                     <Link underline>Home</Link>
                   </NextLink>
                 </li>
                 {navLinks.map(({ href, text }, index) => (
                   <li key={index}>
-                    <NextLink href={href} passHref>
+                    <NextLink href={href} passHref legacyBehavior>
                       <Link underline>{text}</Link>
                     </NextLink>
                   </li>
                 ))}
                 <li>
-                  <NextLink href='/listing/new' passHref>
+                  <NextLink href='/listing/new' passHref legacyBehavior>
                     <Link underline>List</Link>
                   </NextLink>
                 </li>
@@ -45,18 +45,18 @@ export default function SiteMapPage() {
               <ListContainer>
                 {sideBarMenu.map(({ title, href }, index) => (
                   <li key={index}>
-                    <NextLink href={href} passHref>
+                    <NextLink href={href} passHref legacyBehavior>
                       <Link underline>{title}</Link>
                     </NextLink>
                   </li>
                 ))}
                 <li>
-                  <NextLink href='/my/discussions' passHref>
+                  <NextLink href='/my/discussions' passHref legacyBehavior>
                     <Link underline>My Discussions</Link>
                   </NextLink>
                 </li>
                 <li>
-                  <NextLink href='/auth/signin' passHref>
+                  <NextLink href='/auth/signin' passHref legacyBehavior>
                     <Link underline>Sign In</Link>
                   </NextLink>
                 </li>

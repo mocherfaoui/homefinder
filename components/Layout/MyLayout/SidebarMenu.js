@@ -33,7 +33,7 @@ export default function SidebarMenu() {
   return (
     <MenuContainer>
       {sideBarMenuWithIcons.map((item) => (
-        <NextLink key={item.title} href={item.href} passhref>
+        <NextLink key={item.title} href={item.href} passhref legacyBehavior>
           <Link color='text'>
             <FlexText as='div'>
               <HeroIcon>{item.icon}</HeroIcon>

@@ -8,7 +8,7 @@ export default function NavItems({ isOpen }) {
   return (
     <NavContainer isOpen={isOpen}>
       {navLinks.map(({ href, text }, index) => (
-        <NextLink key={index} href={href} passHref>
+        <NextLink key={index} href={href} passHref legacyBehavior>
           <NavItem block>{text}</NavItem>
         </NextLink>
       ))}

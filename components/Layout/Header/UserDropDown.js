@@ -44,7 +44,7 @@ export default function UserDropDown({ session }) {
           referrerPolicy='no-referrer'
         />
         {!session?.user?.agencyId && (
-          <NextLink href='/agency/new' passHref>
+          <NextLink href='/agency/new' passHref legacyBehavior>
             <DropDownLink
               block
               color='default'
@@ -78,7 +78,7 @@ export default function UserDropDown({ session }) {
       <Divider />
       <Card.Body css={{ p: '$sm', py: '$xs' }}>
         {popOverMenuWithIcons.map((menuItem, index) => (
-          <NextLink key={index} href={menuItem.href} passHref>
+          <NextLink key={index} href={menuItem.href} passHref legacyBehavior>
             <DropDownLink block color='text'>
               <HeroIcon>{menuItem.icon}</HeroIcon>
               {menuItem.title}

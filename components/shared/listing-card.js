@@ -42,7 +42,7 @@ export function ListingCard({ listing }) {
           },
         }}
       >
-        <NextLink href={`/listing/${listing?.id}`} passHref>
+        <NextLink href={`/listing/${listing?.id}`} passHref legacyBehavior>
           <Div
             as='a'
             css={{
@@ -82,7 +82,7 @@ export function ListingCard({ listing }) {
           zIndex: 1,
         }}
       >
-        <NextLink href={`/listing/${listing?.id}`} passHref>
+        <NextLink href={`/listing/${listing?.id}`} passHref legacyBehavior>
           <FlexText as='a' css={{ fd: 'column', ai: 'baseline', w: '100%' }}>
             <FlexText as='div' css={{ gap: '$2' }}>
               <Text weight='semibold' size='1.2rem'>

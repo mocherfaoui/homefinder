@@ -149,7 +149,11 @@ export function TopButtons({
           <Popover.Content>
             <Card>
               <Card.Body css={{ p: '$6', gap: '$3' }}>
-                <NextLink href={`/listing/${listingId}/edit`} passHref>
+                <NextLink
+                  href={`/listing/${listingId}/edit`}
+                  passHref
+                  legacyBehavior
+                >
                   <Button
                     size='sm'
                     as='a'

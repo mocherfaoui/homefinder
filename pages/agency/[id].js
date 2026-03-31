@@ -25,7 +25,7 @@ export default function AgencyPage({ agency }) {
         <Card variant='flat'>
           <Card.Header css={{ jc: 'end', gap: '$5' }}>
             {isAgencyOwner && (
-              <NextLink href='/' passhref>
+              <NextLink href='/' passhref legacyBehavior>
                 <Button ghost size='sm' as='a' auto>
                   Edit agency
                 </Button>
@@ -84,7 +84,7 @@ export default function AgencyPage({ agency }) {
         <Card variant='bordered' css={{ mt: '$10' }}>
           <Card.Header css={{ ac: 'center', gap: '$1' }}>
             <Text weight='semibold'>Listings</Text>
-            <NextLink href='/' passHref>
+            <NextLink href='/' passHref legacyBehavior>
               <Link underline>({agency?._count.listings})</Link>
             </NextLink>
           </Card.Header>

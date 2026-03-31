@@ -49,7 +49,7 @@ export default function NavMenu() {
         {status === 'authenticated' && (
           <>
             <Grid xs={0} sm={12}>
-              <NextLink href='/listing/new' passHref>
+              <NextLink href='/listing/new' passHref legacyBehavior>
                 <Button
                   as='a'
                   auto

@@ -19,7 +19,7 @@ export function NoAgencyWarning() {
           }}
         >
           You don't have an agency yet, switch to an agency account from{' '}
-          <NextLink href='/agency/new' passHref>
+          <NextLink href='/agency/new' passHref legacyBehavior>
             <Link underline>here.</Link>
           </NextLink>
         </Text>

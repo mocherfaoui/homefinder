@@ -51,7 +51,11 @@ export default function AboutAgency({ listing }) {
       <Card variant='bordered'>
         <Card.Header>
           <Text h3 weight='semibold' css={{ m: 0 }}>
-            <NextLink href={`/agency/${listing?.owner.id}/listings`} passHref>
+            <NextLink
+              href={`/agency/${listing?.owner.id}/listings`}
+              passHref
+              legacyBehavior
+            >
               <Link underline color='text'>
                 Agency Profile
                 <HeroIcon css={{ ml: '$2' }}>
@@ -128,7 +132,7 @@ export default function AboutAgency({ listing }) {
               )}
             {(discussionWithAgency?.length > 0 || messageSent) && (
               <Grid xs={6} css={{ py: 0 }}>
-                <NextLink href='/my/discussions' passHref>
+                <NextLink href='/my/discussions' passHref legacyBehavior>
                   <Button
                     as='a'
                     ghost
