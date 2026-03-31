@@ -1,5 +1,6 @@
 import { BiBath, BiBed } from 'react-icons/bi';
 import { MdOutlineLocationOn } from 'react-icons/md';
+import Image from 'next/image';
 import NextLink from 'next/link';
 import { Card, Text } from '@nextui-org/react';
 
@@ -53,12 +54,17 @@ export function ListingCard({ listing }) {
             }}
           ></Div>
         </NextLink>
-        <Card.Image
-          showSkeleton
-          css={{ h: '200px!important', w: 'auto' }}
-          src={listing?.images[0]}
-          objectFit='cover'
-        />
+        <div style={{ position: 'relative', height: '200px', width: '100%' }}>
+          <Image
+            src={listing?.images[0]}
+            alt='Listing image'
+            layout='fill'
+            objectFit='cover'
+            sizes='(max-width: 767px) 100vw, 50vw'
+            placeholder='blur'
+            blurDataURL={listing?.images[0]}
+          />
+        </div>
       </Card.Body>
       <Card.Footer
         isBlurred

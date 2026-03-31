@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    images: {
-      allowFutureImage: true,
-      dangerouslyAllowSVG: true,
-      contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    },
+  images: {
+    domains: ['mdempeouxzxdpcvlimug.supabase.co'],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async headers() {
     return [
