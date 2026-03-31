@@ -73,14 +73,13 @@ export function HeroArea() {
             >
               <Image
                 src='/hero-area-desktop.png'
-                objectFit='cover'
                 alt='Image of a house'
-                layout='fill'
+                fill
+                style={{ objectFit: 'cover' }}
                 sizes='(max-width: 767px) 100vw, 50vw'
                 priority
-                fetchPriority='high'
                 placeholder='blur'
-                blurDataURL='/_next/image?url=/hero-area-desktop.png&w=1024&q=50'
+                blurDataURL='/_next/image?url=/hero-area-desktop.png&w=1200&q=50'
               />
             </div>
           </Card>
