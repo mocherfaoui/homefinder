@@ -83,7 +83,7 @@ export default function RatingsPage({
               },
             }}
           >
-            <NextLink href={`/listing/${listingData.id}`} passHref>
+            <NextLink href={`/listing/${listingData.id}`} passHref legacyBehavior>
               <Button
                 as='a'
                 bordered

@@ -48,7 +48,7 @@ const ConfirmRequest = () => {
                 <Grid xs={12} justify='center'>
                   <Text>
                     You can close this window or click{' '}
-                    <NextLink href='/' passHref>
+                    <NextLink href='/' passHref legacyBehavior>
                       <Link>this link</Link>
                     </NextLink>{' '}
                     to go back to the homepage.

@@ -23,10 +23,8 @@ export default function Header() {
       }}
     >
       <Navbar.Brand css={{ ai: 'center', cursor: 'pointer' }}>
-        <NextLink href='/' passHref>
-          <Link>
-            <Image width={150} height={50} src={logo} alt='logo' priority />
-          </Link>
+        <NextLink href='/' passHref legacyBehavior>
+          <Image width={150} height={50} src={logo} alt='logo' priority />
         </NextLink>
       </Navbar.Brand>
       <Navbar.Content
@@ -36,7 +34,7 @@ export default function Header() {
         enableCursorHighlight
       >
         {navLinks.map(({ href, text }, index) => (
-          <NextLink key={index} href={href} passHref>
+          <NextLink key={index} href={href} passHref legacyBehavior>
             <Navbar.Link
               isActive={pathname === href}
               css={{ fs: '$lg!important', fontWeight: '$semibold!important' }}

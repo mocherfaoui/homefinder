@@ -414,6 +414,7 @@ export default function ListingPage({
                       <NextLink
                         href={`/listing/${listing?.id}/ratings`}
                         passHref
+                        legacyBehavior
                       >
                         <Link underline color='text'>
                           Ratings
@@ -443,6 +444,7 @@ export default function ListingPage({
                         <NextLink
                           href={`/listing/${listing?.id}/ratings`}
                           passHref
+                          legacyBehavior
                         >
                           <Button as='a' auto>
                             Rate it!

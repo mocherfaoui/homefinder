@@ -128,7 +128,7 @@ export function AboveFooterCard() {
                       <li>
                         {!session?.user?.agencyId ? (
                           <>
-                            <NextLink href='/agency/new' passHref>
+                            <NextLink href='/agency/new' passHref legacyBehavior>
                               <Link underline css={{ d: 'inline-flex' }}>
                                 switch{' '}
                               </Link>
@@ -142,7 +142,7 @@ export function AboveFooterCard() {
                       <li>
                         {!userHasListings && !isLoadingUserListings ? (
                           <>
-                            <NextLink href='/listing/new' passHref>
+                            <NextLink href='/listing/new' passHref legacyBehavior>
                               <Link underline css={{ d: 'inline-flex' }}>
                                 start selling
                               </Link>
