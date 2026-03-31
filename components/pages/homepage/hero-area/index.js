@@ -77,8 +77,10 @@ export function HeroArea() {
                 alt='Image of a house'
                 layout='fill'
                 sizes='(max-width: 767px) 100vw, 50vw'
+                priority
+                fetchPriority='high'
                 placeholder='blur'
-                blurDataURL='/hero-area-desktop.png'
+                blurDataURL='/_next/image?url=/hero-area-desktop.png&w=1024&q=50'
               />
             </div>
           </Card>
