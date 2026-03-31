@@ -62,7 +62,9 @@ export function ListingCard({ listing }) {
             objectFit='cover'
             sizes='(max-width: 767px) 100vw, 50vw'
             placeholder='blur'
-            blurDataURL={listing?.images[0]}
+            blurDataURL={`/_next/image?url=${encodeURIComponent(
+              listing?.images[0]
+            )}&w=1024&q=50`}
           />
         </div>
       </Card.Body>
