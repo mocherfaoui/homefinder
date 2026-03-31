@@ -223,12 +223,10 @@ export default function ListingPage({
                               <Image
                                 src={image}
                                 alt='listing image'
-                                layout='fill'
-                                objectFit='cover'
+                                fill
+                                style={{objectFit: 'cover'}}
                                 sizes='(max-width: 767px) 100vw, 50vw'
                                 priority={index < 2}
-                                fetchpriority={index < 2 ? 'high' : 'auto'}
-                                loading={index < 2 ? 'eager' : 'lazy'}
                               />
                             </a>
                           </SwiperSlide>

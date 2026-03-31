@@ -58,13 +58,13 @@ export function ListingCard({ listing }) {
           <Image
             src={listing?.images[0]}
             alt='Listing image'
-            layout='fill'
-            objectFit='cover'
+            fill
+            style={{ objectFit: 'cover' }}
             sizes='(max-width: 767px) 100vw, 50vw'
             placeholder='blur'
             blurDataURL={`/_next/image?url=${encodeURIComponent(
               listing?.images[0]
-            )}&w=1024&q=50`}
+            )}&w=1200&q=50`}
           />
         </div>
       </Card.Body>

@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import Image from 'next/future/image';
+import Image from 'next/image';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Link, Navbar } from '@nextui-org/react';
