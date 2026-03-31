@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Image from 'next/image';
 import Router from 'next/router';
 import { SearchIcon } from '@heroicons/react/outline';
 import { Button, Card, Grid, Input, Text } from '@nextui-org/react';
@@ -15,7 +16,7 @@ export function HeroArea() {
   const [purchaseType, setPurchaseType] = useState('for-rent');
   const { register, handleSubmit, formState, control } = useForm();
   const { errors } = formState;
-  const isMobile = useMediaQuery('(max-width: 650px)');
+  const isDesktop = useMediaQuery('(min-width: 960px)');
   const types = propertyTypes.map((type) => ({
     value: type,
     label: type,
@@ -50,7 +51,7 @@ export function HeroArea() {
   );
   return (
     <Grid.Container as='section' direction='row'>
-      {!isMobile && (
+      {isDesktop && (
         <Grid xs={0} sm={12}>
           <Card
             variant='flat'
@@ -63,26 +64,36 @@ export function HeroArea() {
             <Card.Body css={{ p: '$5 $15', width: '60%' }}>
               <HeroAreaText desktop />
             </Card.Body>
-            <Card.Image
-              showSkeleton
-              src='/hero-area-desktop.png'
-              height={500}
-              width={600}
-              objectFit='cover'
-            />
+            <div
+              style={{
+                position: 'relative',
+                height: '500px',
+                width: '600px',
+              }}
+            >
+              <Image
+                src='/hero-area-desktop.png'
+                objectFit='cover'
+                alt='Image of a house'
+                layout='fill'
+                sizes='(max-width: 767px) 100vw, 50vw'
+                placeholder='blur'
+                blurDataURL='/hero-area-desktop.png'
+              />
+            </div>
           </Card>
         </Grid>
       )}
-      {isMobile && (
-        <Grid direction='column' xs={12} sm={0}>
-          <HeroAreaText />
-        </Grid>
-      )}
+
+      <Grid direction='column' xs={12} sm={0}>
+        <HeroAreaText />
+      </Grid>
+
       <Grid.Container
         css={{
           m: '-$28 $15 $10',
           zIndex: 100,
-          '@xsMax': {
+          '@smMax': {
             mt: '$15!important',
             mx: '0!important',
           },

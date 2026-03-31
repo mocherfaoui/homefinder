@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Button, Card, Grid, Input, Link, Text } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 import useSWR from 'swr';
+
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 import { FlexDiv, Wrapper } from '@/components/shared';
 
@@ -16,6 +19,7 @@ export function AboveFooterCard() {
     isUserAuthenticated ? '/api/user/listings' : '',
     fetcher
   );
+  const isDesktop = useMediaQuery('(min-width: 960px)');
   const userHasListings = userListings && userListings?.length > 0;
   const [email, setEmail] = useState('');
   const router = useRouter();
@@ -30,16 +34,25 @@ export function AboveFooterCard() {
           <Card variant='flat' css={{ bg: '#E3EEF1' }}>
             <Card.Body css={{ p: 0 }}>
               <Grid.Container direction='row' wrap='nowrap'>
-                <Grid xs={0} sm={5}>
-                  <Card.Image
-                    showSkeleton
-                    src='/homepage-above-footer.png'
-                    height={500}
-                    width={600}
-                    objectFit='cover'
-                    css={{ m: 0 }}
-                  />
-                </Grid>
+                {isDesktop && (
+                  <Grid xs={0} sm={5}>
+                    <div
+                      style={{
+                        position: 'relative',
+                        height: '500px',
+                        width: '600px',
+                      }}
+                    >
+                      <Image
+                        src='/homepage-above-footer.png'
+                        objectFit='cover'
+                        alt='Image of a house'
+                        layout='fill'
+                        sizes='(max-width: 767px) 100vw, 50vw'
+                      />
+                    </div>
+                  </Grid>
+                )}
                 <Grid.Container
                   xs={12}
                   sm={8}

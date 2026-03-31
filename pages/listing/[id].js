@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BiBath, BiBed, BiExpand } from 'react-icons/bi';
 import { MdOutlineLocationOn } from 'react-icons/md';
+import Image from 'next/image';
 import NextLink from 'next/link';
 import {
   ChevronLeftIcon,
@@ -10,15 +11,7 @@ import {
   HomeIcon,
 } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
-import {
-  Button,
-  Card,
-  Divider,
-  Grid,
-  Image,
-  Link,
-  Text,
-} from '@nextui-org/react';
+import { Button, Card, Divider, Grid, Link, Text } from '@nextui-org/react';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -50,6 +43,8 @@ import {
 import dayjs from '@/utils/dayjs';
 import { fetcher } from '@/utils/fetcher';
 import timeAgo from '@/utils/timeAgo';
+
+const GALLERY_SLIDE_HEIGHT_PX = 300;
 
 export default function ListingPage({
   listing,
@@ -215,13 +210,23 @@ export default function ListingPage({
                               target='_blank'
                               rel='noreferrer'
                               data-cropped='true'
+                              style={{
+                                display: 'block',
+                                position: 'relative',
+                                width: '100%',
+                                height: GALLERY_SLIDE_HEIGHT_PX,
+                                borderRadius: 'var(--nextui-radii-sm)',
+                                overflow: 'hidden',
+                              }}
                             >
                               <Image
                                 src={image}
-                                objectFit='cover'
-                                height={300}
-                                css={{ br: '$sm' }}
                                 alt='listing image'
+                                layout='fill'
+                                objectFit='cover'
+                                sizes='(max-width: 767px) 100vw, 50vw'
+                                priority={index < 2}
+                                loading={index < 2 ? 'eager' : 'lazy'}
                               />
                             </a>
                           </SwiperSlide>
